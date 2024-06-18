@@ -1,9 +1,8 @@
 package com.morozov.testtaskforviesure.data
 
+import com.morozov.testtaskforviesure.domain.Book
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
-
 
 
 @Serializable
@@ -23,3 +22,15 @@ data class BookModelItem(
     @SerialName("titlee")
     val titlee: String
 )
+
+fun BookModelItem.toDomain(): Book {
+    return Book(
+        author = this.author,
+        description = this.description,
+        id = this.id,
+        image = this.image,
+        releaseDate = this.releaseDate,
+        title = this.title,
+        titlee = this.titlee
+    )
+}

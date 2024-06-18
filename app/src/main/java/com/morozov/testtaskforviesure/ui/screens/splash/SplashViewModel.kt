@@ -13,7 +13,6 @@ sealed class SplashAction {
     data object GoToMain : SplashAction()
 }
 
-
 class SplashViewModel (
 
 ) :  ViewModel() {
