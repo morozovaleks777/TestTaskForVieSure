@@ -10,6 +10,16 @@ activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 composeNavigation = "2.8.0-beta03"
 serialization = "1.6.3"
+hilt = "2.50"
+hiltNavigation = "1.2.0"
+kspVersion = "1.9.0-1.0.12"
+retrofit2 = "2.9.0"
+okHttp3 = "4.12.0"
+
+
+
+
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,8 +39,20 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
 
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-compose_navigation = {module = "androidx.hilt:hilt-navigation-compose",version.ref = "hiltNavigation"}
+
+okHttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp3" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
+retrofitConverterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="kspVersion" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
 
