@@ -62,7 +62,7 @@ class BooksViewModel @Inject constructor(
                         image = action.book.image.orEmpty(),
                         releaseDate = action.book.releaseDate.orEmpty(),
                         title = action.book.title.orEmpty(),
-                        //titlee = action.book.titlee.orEmpty(),
+                        titlee = action.book.titlee.orEmpty(),
                     )
                 )
             }
