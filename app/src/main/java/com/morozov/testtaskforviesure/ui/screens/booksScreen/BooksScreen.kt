@@ -23,11 +23,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.morozov.testtaskforviesure.data.LoadableUiState
 import com.morozov.testtaskforviesure.domain.Book
+import com.morozov.testtaskforviesure.navigation.BookDetail
 
 @Composable
 fun BooksScreen(
     viewModel: BooksViewModel,
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     LaunchedEffect(Unit) {
         viewModel.send(BooksAction.GetBooksData())
@@ -43,6 +44,7 @@ fun BooksScreen(
                     items(books) { book ->
                         Text("Title: ${book.title}, Author: ${book.author}",
                             modifier = Modifier.clickable {
+                               viewModel.send(BooksAction.GoToBookDetail(book))
 
                             })
                     }

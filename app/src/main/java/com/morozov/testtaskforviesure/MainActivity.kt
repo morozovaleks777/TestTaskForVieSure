@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.morozov.testtaskforviesure.ui.BookApp
+import com.morozov.testtaskforviesure.ui.BookAppViewModel
 import com.morozov.testtaskforviesure.ui.theme.TestTaskForVieSureTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +18,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
            TestTaskForVieSureTheme  {
-               BookApp()
+               BookApp(viewModel = hiltViewModel<BookAppViewModel>())
             }
         }
     }

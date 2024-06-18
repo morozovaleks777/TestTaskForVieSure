@@ -8,6 +8,9 @@ import com.morozov.testtaskforviesure.data.LoadableUiState
 import com.morozov.testtaskforviesure.data.toLoadableUiState
 import com.morozov.testtaskforviesure.domain.Book
 import com.morozov.testtaskforviesure.domain.GetBooksUseCase
+import com.morozov.testtaskforviesure.navigation.BookDetail
+import com.morozov.testtaskforviesure.navigation.NavigationManager
+import com.morozov.testtaskforviesure.navigation.goToBooksDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,20 +25,22 @@ import javax.inject.Inject
 data class BooksUiState(
     val booksPageState: LoadableUiState<List<Book>> = LoadableUiState.Loading(),
     val goToBookDetail: LoadableUiState<Book> = LoadableUiState.Loading()
-    )
+)
 
 sealed class BooksAction {
 
     data class ShowToast(val message: String) : BooksAction()
     data class GetBooksData(val isRefreshing: Boolean = false) : BooksAction()
-    data class GoToBookDetail(val book: Book): BooksAction()
+    data class GoToBookDetail(val book: Book) : BooksAction()
 
 }
 
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
-    private val getBooksUseCase: GetBooksUseCase
+    private val navigationManager: NavigationManager,
+    private val getBooksUseCase: GetBooksUseCase,
+
 ) : ViewModel() {
 
 
@@ -48,8 +53,20 @@ class BooksViewModel @Inject constructor(
             is BooksAction.ShowToast -> {}
             is BooksAction.GetBooksData -> fetchBooks()
             is BooksAction.GoToBookDetail -> {
-
+                navigationManager.goToBooksDetail(
+                  bookDetail =   BookDetail
+                      (
+                        author = action.book.author.orEmpty(),
+                        description = action.book.description.orEmpty(),
+                        id = action.book.id ?: 0,
+                        image = action.book.image.orEmpty(),
+                        releaseDate = action.book.releaseDate.orEmpty(),
+                        title = action.book.title.orEmpty(),
+                        //titlee = action.book.titlee.orEmpty(),
+                    )
+                )
             }
+
             else -> {
                 throw IllegalArgumentException("Data for insticator WebView should be available")
             }
