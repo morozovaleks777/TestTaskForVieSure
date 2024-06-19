@@ -90,5 +90,8 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.bundles.android.room.bundle)
+    // encrypt
+    implementation(libs.encrypting)
+    implementation(libs.security.crypto)
 
 }

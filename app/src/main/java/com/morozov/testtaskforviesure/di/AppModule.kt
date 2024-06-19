@@ -10,11 +10,13 @@ import com.morozov.testtaskforviesure.data.room.BookDatabase
 import com.morozov.testtaskforviesure.data.room.RoomRepositoryImpl
 import com.morozov.testtaskforviesure.domain.Repository
 import com.morozov.testtaskforviesure.domain.RoomRepository
+import com.morozov.testtaskforviesure.utils.UserDatabasePassphrase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SupportFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -53,7 +55,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDailyWireRetrofit(
+    fun provideRetrofit(
         okHttpClient: OkHttpClient,
     ): Retrofit {
         val gson = GsonBuilder().create()
@@ -79,29 +81,34 @@ object AppModule {
     }
 
 
-//@Singleton
-//@Provides
-//fun provideDatabase(app: Context): BookDatabase {
-//    return Room.databaseBuilder(
-//        app,
-//        BookDatabase::class.java,
-//        "book_database"
-//    ).build()
-//}
 
+
+
+
+    @Provides
+    @Singleton
+    fun provideUserDatabasePassphrase(@ApplicationContext context: Context) = UserDatabasePassphrase(context)
+
+    @Provides
+    @Singleton
+    fun provideSupportFactory(userDatabasePassphrase: UserDatabasePassphrase) = SupportFactory(userDatabasePassphrase.getPassphrase())
 
     @Singleton
     @Provides
     fun provideAppDatabase(
         @ApplicationContext
-        context: Context
-    ): BookDatabase =
-        Room.databaseBuilder(
+        context: Context,
+        supportFactory: SupportFactory
+    ): BookDatabase {
+
+
+      return  Room.databaseBuilder(
             context, BookDatabase::class.java,
             "app_database"
         ).fallbackToDestructiveMigration()
+          .openHelperFactory(supportFactory)
             .build()
-
+    }
 
     @Singleton
     @Provides
