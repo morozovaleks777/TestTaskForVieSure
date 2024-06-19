@@ -1,10 +1,15 @@
 package com.morozov.testtaskforviesure.di
 
 import android.content.Context
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.morozov.testtaskforviesure.data.ApiService
 import com.morozov.testtaskforviesure.data.RepositoryImpl
+import com.morozov.testtaskforviesure.data.room.BookDao
+import com.morozov.testtaskforviesure.data.room.BookDatabase
+import com.morozov.testtaskforviesure.data.room.RoomRepositoryImpl
 import com.morozov.testtaskforviesure.domain.Repository
+import com.morozov.testtaskforviesure.domain.RoomRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -72,5 +77,38 @@ object AppModule {
     fun provideRepository(booksService: ApiService): Repository {
         return RepositoryImpl(booksService)
     }
+
+
+//@Singleton
+//@Provides
+//fun provideDatabase(app: Context): BookDatabase {
+//    return Room.databaseBuilder(
+//        app,
+//        BookDatabase::class.java,
+//        "book_database"
+//    ).build()
+//}
+
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(
+        @ApplicationContext
+        context: Context
+    ): BookDatabase =
+        Room.databaseBuilder(
+            context, BookDatabase::class.java,
+            "app_database"
+        ).fallbackToDestructiveMigration()
+            .build()
+
+
+    @Singleton
+    @Provides
+    fun provideBookDao(appDatabase: BookDatabase): BookDao =
+        appDatabase.bookDao()
+
+    @Provides
+    fun provideRoomRepository(bookDao: BookDao): RoomRepository = RoomRepositoryImpl(bookDao)
 
 }

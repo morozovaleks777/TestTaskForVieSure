@@ -15,6 +15,10 @@ hiltNavigation = "1.2.0"
 kspVersion = "1.9.0-1.0.12"
 retrofit2 = "2.9.0"
 okHttp3 = "4.12.0"
+room = "2.6.1"
+coilVersion = "2.6.0"
+ksp = "1.9.0-1.0.13"
+
 
 
 
@@ -48,11 +52,20 @@ okHttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHt
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
 retrofitConverterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
 
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
-kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="kspVersion" }
+kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="ksp" }
 hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
 
+
+[bundles]
+android-room-bundle = ["androidx-room-ktx", "androidx-room-runtime"]

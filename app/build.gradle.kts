@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlinAndroidKsp)
     alias(libs.plugins.hiltAndroid)
+
 }
 
 android {
@@ -83,6 +84,11 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofitConverterGson)
     //coil
-
+    implementation(libs.coil)
+    //room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.bundles.android.room.bundle)
 
 }
