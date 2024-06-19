@@ -19,6 +19,7 @@ coilVersion = "2.6.0"
 ksp = "1.9.0-1.0.13"
 encrypt = "4.5.0"
 security = "1.0.0"
+pullRefresh = "1.0.0"
 
 
 
@@ -59,6 +60,11 @@ coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion
 
 encrypting = {module = "net.zetetic:android-database-sqlcipher",version.ref = "encrypt"}
 security-crypto ={ module ="androidx.security:security-crypto",version.ref = "security"}
+pullrefresh = { module = "eu.bambooapps:compose-material3-pullrefresh", version.ref = "pullRefresh"}
+
+
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -67,6 +73,8 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="ksp" }
 hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
+
+
 
 
 

@@ -26,6 +26,7 @@ import com.morozov.testtaskforviesure.navigation.onNavigationEvent
 import com.morozov.testtaskforviesure.ui.components.topbar.BookAppBar
 import com.morozov.testtaskforviesure.ui.screens.aboutMe.AboutMe
 import com.morozov.testtaskforviesure.ui.screens.bookDetail.BookDetailScreen
+import com.morozov.testtaskforviesure.ui.screens.bookDetail.BookDetailViewModel
 import com.morozov.testtaskforviesure.ui.screens.booksScreen.BooksScreen
 import com.morozov.testtaskforviesure.ui.screens.booksScreen.BooksViewModel
 import com.morozov.testtaskforviesure.ui.screens.splash.SplashScreen
@@ -47,7 +48,7 @@ fun BookApp(
     val navController = rememberNavController()
     var topBarState by remember { mutableStateOf(TopBarState()) }
 
-    WDAppEventEffect(
+    BookAppEventEffect(
         navController = navController,
         appEvents = viewModel.events.filterIsInstance()
     )
@@ -79,6 +80,7 @@ fun BookApp(
                     BooksScreen(
                         navController = navController,
                         viewModel = hiltViewModel<BooksViewModel>(),
+                        parentTopPadding = paddingValues.calculateTopPadding()
 
                         )
 
@@ -86,6 +88,7 @@ fun BookApp(
                 composablePage<BookDetail> {
                     val args = it.toRoute<BookDetail>()
                     BookDetailScreen(
+                        viewModel = hiltViewModel<BookDetailViewModel>(),
                         args = args
                     )
                 }
@@ -99,7 +102,7 @@ fun BookApp(
 }
 
 @Composable
-private fun WDAppEventEffect(
+private fun BookAppEventEffect(
     navController: NavHostController,
     appEvents: Flow<WDAppEvent>,
 

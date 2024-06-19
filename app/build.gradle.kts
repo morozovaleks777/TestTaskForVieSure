@@ -93,5 +93,7 @@ dependencies {
     // encrypt
     implementation(libs.encrypting)
     implementation(libs.security.crypto)
+    //pulrefresh
+    implementation(libs.pullrefresh)
 
 }

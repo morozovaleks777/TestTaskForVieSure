@@ -1,6 +1,5 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
-import android.util.Log
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +14,7 @@ import com.morozov.testtaskforviesure.navigation.goToAboutMe
 import com.morozov.testtaskforviesure.navigation.goToBooksDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,6 +26,7 @@ import javax.inject.Inject
 @Stable
 data class BooksUiState(
     val booksPageState: LoadableUiState<List<Book>> = LoadableUiState.Loading(),
+    val isRefreshing: Boolean = false,
     // val goToBookDetail: LoadableUiState<Book> = LoadableUiState.Loading()
 )
 
@@ -53,7 +54,7 @@ class BooksViewModel @Inject constructor(
         when (action) {
 
             is BooksAction.ShowToast -> {}
-            is BooksAction.GetBooksData -> fetchBooks()
+            is BooksAction.GetBooksData -> fetchBooks(action.isRefreshing)
             is BooksAction.GoToBookDetail -> {
                 navigationManager.goToBooksDetail(
                     bookDetail = BookDetail
@@ -79,22 +80,25 @@ class BooksViewModel @Inject constructor(
 
     }
 
-    private fun fetchBooks() {
+    private fun fetchBooks(isRefreshing: Boolean) {
         viewModelScope.launch {
-
-
-            val books = async {
-                getBooksUseCase.invoke()
-            }.await()
-
             _uiState.update {
                 it.copy(
-                    booksPageState = books.toLoadableUiState(),
+                    isRefreshing = isRefreshing
+                )
+            }
 
-                    )
+                val books = async {
+                    getBooksUseCase.invoke()
+                }.await()
+
+                _uiState.update {
+                    it.copy(
+                        booksPageState = books.toLoadableUiState(),
+                        isRefreshing = false
+                        )
+                }
 
             }
-            Log.d("post", "fetchBooks:${books.toLoadableUiState()} ")
         }
     }
-}
