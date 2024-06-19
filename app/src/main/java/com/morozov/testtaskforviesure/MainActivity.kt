@@ -1,5 +1,6 @@
 package com.morozov.testtaskforviesure
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,7 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.morozov.testtaskforviesure.ui.BookApp
 import com.morozov.testtaskforviesure.ui.BookAppViewModel
-import com.morozov.testtaskforviesure.ui.theme.TestTaskForVieSureTheme
+import com.morozov.testtaskforviesure.ui.theme.BookAppTheme
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -17,8 +19,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-           TestTaskForVieSureTheme  {
-               BookApp(viewModel = hiltViewModel<BookAppViewModel>())
+            BookAppTheme {
+                BookApp(viewModel = hiltViewModel<BookAppViewModel>())
             }
         }
     }

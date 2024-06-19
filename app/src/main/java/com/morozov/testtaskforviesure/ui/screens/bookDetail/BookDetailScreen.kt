@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.ui.screens.bookDetailScreen
+package com.morozov.testtaskforviesure.ui.screens.bookDetail
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

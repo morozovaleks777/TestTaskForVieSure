@@ -1,15 +1,15 @@
 package com.morozov.testtaskforviesure.navigation
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.navigation.NavHostController
 
 
 fun NavHostController.onNavigationEvent(event: NavigationAction) {
     when (event) {
-        is NavigationAction.GoTo ->   {
-            Log.d("post", "onNavigationEvent: $event -> ${event.direction}")
-            navigated(event.direction)}
+        is NavigationAction.GoTo -> {
+            navigated(event.direction)
+        }
+
         else -> popBackIfAvailable()
     }
 }
@@ -17,11 +17,10 @@ fun NavHostController.onNavigationEvent(event: NavigationAction) {
 @SuppressLint("RestrictedApi")
 fun NavHostController.navigated(direction: NavigationObject) {
     try {
-       // Timber.d(direction.toString())
-        Log.d("post", "navigated: $direction")
-            navigate(direction)
+        // Timber.d(direction.toString())
+        navigate(direction)
     } catch (e: Exception) {
-       // Timber.e(e)
+        // Timber.e(e)
     }
 }
 

@@ -15,8 +15,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
 import com.morozov.testtaskforviesure.R
 import com.morozov.testtaskforviesure.navigation.Books
+import com.morozov.testtaskforviesure.navigation.Splash
+import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import kotlinx.coroutines.delay
 
 
@@ -28,16 +31,17 @@ fun SplashScreen(
 ) {
 
 
-    // val topBarStateUpdater = LocalTopBarUpdater.current
+    val topBarStateUpdater = LocalTopBarUpdater.current
 
 
     LaunchedEffect(Unit) {
-//         topBarStateUpdater(TopBarState(showAppBar = false))
+        topBarStateUpdater(TopBarState(showAppBar = false))
 //         CoroutineScope(Dispatchers.Default).launch {
         //  Simulate loading data
         delay(800)
-        navController.navigate(Books)
-        //   }
+        navController.navigate(Books) {
+            popUpTo(Splash) { inclusive = true }
+        }
     }
 
     SplashLayout(
