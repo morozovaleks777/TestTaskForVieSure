@@ -2,9 +2,10 @@ package com.morozov.testtaskforviesure.ui.components.topbar
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-
+@Stable
 data class TopBarState(
     val showAppBar: Boolean = true,
     val showBackIcon: Boolean = false,
@@ -21,7 +22,7 @@ data class TopBarState(
     val dynamicContainerColor: (@Composable () -> Color)? = null
 )
 
-
+@Stable
 data class TopBarAction(
     val icon: ImageVector,
     val onClick: () -> Unit,

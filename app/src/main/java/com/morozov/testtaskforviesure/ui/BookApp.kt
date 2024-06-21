@@ -78,7 +78,6 @@ fun BookApp(
                 composablePage<Books> {
 
                     BooksScreen(
-                        navController = navController,
                         viewModel = hiltViewModel<BooksViewModel>(),
                         parentTopPadding = paddingValues.calculateTopPadding()
 

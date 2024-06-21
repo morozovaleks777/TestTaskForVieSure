@@ -1,6 +1,5 @@
 package com.morozov.testtaskforviesure.domain.roomUseCases
 
-import androidx.room.Room
 import com.morozov.testtaskforviesure.domain.RoomRepository
 import javax.inject.Inject
 

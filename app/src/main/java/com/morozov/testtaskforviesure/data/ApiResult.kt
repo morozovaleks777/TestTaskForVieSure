@@ -1,6 +1,7 @@
 package com.morozov.testtaskforviesure.data
 
 import androidx.compose.runtime.Stable
+import com.morozov.testtaskforviesure.domain.Book
 
 
 data class ApiResult<T>(
@@ -17,6 +18,12 @@ fun <T> ApiResult<T>.toLoadableUiState(): LoadableUiState<T> {
     return when {
         this.success && this.data != null -> LoadableUiState.Available(this.data)
         else -> LoadableUiState.Error(this.error?.message)
+    }
+}
+fun  List<Book>.toLoadableUiState(): LoadableUiState<List<Book>> {
+    return when {
+        true -> LoadableUiState.Available(this)
+        else -> LoadableUiState.Error()
     }
 }
 

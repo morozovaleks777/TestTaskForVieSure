@@ -1,6 +1,7 @@
 package com.morozov.testtaskforviesure.data
 
 import com.morozov.testtaskforviesure.domain.Book
+import com.morozov.testtaskforviesure.ui.utils.toCustomDateFormat
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -29,7 +30,7 @@ fun BookModelItem.toDomain(): Book {
         description = this.description,
         id = this.id,
         image = this.image,
-        releaseDate = this.releaseDate,
+        releaseDate = this.releaseDate.toCustomDateFormat(),
         title = this.title,
         titlee = this.titlee
     )

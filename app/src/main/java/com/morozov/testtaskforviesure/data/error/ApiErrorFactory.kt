@@ -1,6 +1,6 @@
 package com.morozov.testtaskforviesure.data.error
 
-import com.dailywire.thedailywire.components.api.error.ApiError
+
 import java.net.SocketException
 import java.net.UnknownHostException
 

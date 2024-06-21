@@ -20,8 +20,16 @@ ksp = "1.9.0-1.0.13"
 encrypt = "4.5.0"
 security = "1.0.0"
 pullRefresh = "1.0.0"
-
-
+mockitocore = "3.11.2"
+mockitokotlin = "3.2.0"
+mockitoinline = "3.11.2"
+mockitorelease ="1.5.4"
+coroutinestest = "1.6.4"
+coretesting = "2.2.0"
+coreKtxVersion = "1.5.0"
+junitKtx = "1.1.5"
+navigationTesting = "2.7.7"
+mockk = "1.12.0"
 
 
 
@@ -63,6 +71,21 @@ security-crypto ={ module ="androidx.security:security-crypto",version.ref = "se
 pullrefresh = { module = "eu.bambooapps:compose-material3-pullrefresh", version.ref = "pullRefresh"}
 
 
+testmockito-core = {module = 'org.mockito:mockito-core',version.ref = "mockitocore"}
+testmockito-kotlin  = {module = 'org.mockito.kotlin:mockito-kotlin',version.ref = "mockitokotlin"}
+testmockito-inline =  {module = 'org.mockito:mockito-inline',version.ref = "mockitoinline"}
+testmockito-release  = {module = 'org.powermock:powermock-mockito-release-full',version.ref = "mockitorelease"}
+
+
+# AndroidX Core Testing for ViewModel testing
+testcore-testing = {module ='androidx.arch.core:core-testing',version.ref = "coretesting" }
+# Kotlin coroutines test library
+testcoroutines-test = {module ='org.jetbrains.kotlinx:kotlinx-coroutines-test',version.ref = "coroutinestest" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
+
+mockk = {module = "io.mockk:mockk",version.ref = "mockk"}
 
 
 

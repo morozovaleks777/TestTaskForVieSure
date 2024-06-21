@@ -20,7 +20,10 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 import com.morozov.testtaskforviesure.ui.theme.LazyLoadingColor
 import com.morozov.testtaskforviesure.ui.theme.ShimmerColor
-
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 
 fun Modifier.clickableNoRipple(onClick: () -> Unit): Modifier = composed {
@@ -58,5 +61,26 @@ fun Modifier.shimmerEffect(): Modifier = composed {
         )
     ).onGloballyPositioned {
         size = it.size
+    }
+}
+
+
+fun String?.toCustomDateFormat(): String {
+    if (this.isNullOrBlank()) {
+        return ""
+    }
+
+    return try {
+        val formatter = DateTimeFormatter.ofPattern("M/d/yyyy")
+        val date = LocalDate.parse(this, formatter)
+
+        val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+        val month = date.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+        val dayOfMonth = date.dayOfMonth
+        val year = date.year % 100
+
+        "$dayOfWeek, $month $dayOfMonth, '$year"
+    } catch (ex: Exception) {
+        ""
     }
 }

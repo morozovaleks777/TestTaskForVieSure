@@ -1,4 +1,4 @@
-package com.dailywire.thedailywire.components.api.error
+package com.morozov.testtaskforviesure.data.error
 
 sealed class ApiError {
     abstract val throwable: Throwable

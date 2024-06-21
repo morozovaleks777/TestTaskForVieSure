@@ -1,0 +1,39 @@
+package com.morozov.testtaskforviesure
+
+import com.morozov.testtaskforviesure.data.ApiError
+import com.morozov.testtaskforviesure.data.ApiResult
+import com.morozov.testtaskforviesure.data.LoadableUiState
+import com.morozov.testtaskforviesure.data.toLoadableUiState
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class ApiResultExtensionsTest {
+
+    @Test
+    fun `test toLoadableUiState() success with data`() {
+
+        val data = "Success data"
+        val apiResult = ApiResult(success = true, data = data, error = null)
+
+
+        val loadableUiState = apiResult.toLoadableUiState()
+
+        assertEquals(true, loadableUiState is LoadableUiState.Available)
+        assertEquals(data, (loadableUiState as LoadableUiState.Available).data)
+    }
+
+    @Test
+    fun `test toLoadableUiState() error`() {
+
+        val errorMessage = "Error message"
+        val apiError = ApiError(errorMessage)
+
+        val apiResult = ApiResult(success = false, data = null, error = apiError)
+
+        val loadableUiState = apiResult.toLoadableUiState()
+
+
+        assertEquals(true, loadableUiState is LoadableUiState.Error)
+        assertEquals(errorMessage, (loadableUiState as LoadableUiState.Error).message)
+    }
+}

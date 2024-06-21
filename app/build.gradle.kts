@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.core.ktx)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.navigation.testing)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,7 +96,16 @@ dependencies {
     // encrypt
     implementation(libs.encrypting)
     implementation(libs.security.crypto)
-    //pulrefresh
-    implementation(libs.pullrefresh)
+    //refresher
+     implementation(libs.pullrefresh)
+
+    testImplementation(libs.testmockito.core)
+    testImplementation(libs.testmockito.kotlin)
+    testImplementation(libs.testmockito.release)
+    testImplementation(libs.testmockito.inline)
+
+    testImplementation(libs.testcore.testing)
+    testImplementation(libs.testcoroutines.test)
+    testImplementation(libs.mockk)
 
 }

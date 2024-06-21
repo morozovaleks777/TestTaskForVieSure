@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 
-class GetBooksUseCase @Inject constructor(
+class GetBooksUseCaseFromRoom @Inject constructor(
     private val bookRepository: RoomRepository
 ) {
     @OptIn(ExperimentalCoroutinesApi::class)
