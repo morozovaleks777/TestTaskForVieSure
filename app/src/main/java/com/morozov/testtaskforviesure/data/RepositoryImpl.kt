@@ -20,9 +20,11 @@ class RepositoryImpl @Inject constructor(private val service: ApiService) : Repo
             ApiResult(
                 success = false,
                 data = null,
-                error = e.message?.let { ApiError(message = it) }
+                error = ApiError("Failed to fetch books: ${e.message}")
             )
         }
     }
 }
+
+
 

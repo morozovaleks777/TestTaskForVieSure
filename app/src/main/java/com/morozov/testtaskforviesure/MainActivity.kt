@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.morozov.testtaskforviesure.ui.BookApp
 import com.morozov.testtaskforviesure.ui.BookAppViewModel
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BookAppTheme {
                 BookApp(viewModel = hiltViewModel<BookAppViewModel>())
+
             }
         }
     }

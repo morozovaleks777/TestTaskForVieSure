@@ -5,6 +5,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.morozov.testtaskforviesure.data.ApiResult
 import com.morozov.testtaskforviesure.data.LoadableUiState
 import com.morozov.testtaskforviesure.data.toLoadableUiState
 import com.morozov.testtaskforviesure.domain.Book
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -70,10 +72,9 @@ class BooksViewModel @Inject constructor(
                     )
                 )
             }
+
             is BooksAction.AboutMe -> navigationManager.goToAboutMe(AboutMe)
-            else -> {
-                throw IllegalArgumentException("Data  should be available")
-            }
+
         }
     }
 
@@ -95,14 +96,12 @@ class BooksViewModel @Inject constructor(
                 onSuccess = { books ->
                     Log.d("post", "fetchBooks: onsucces")
                     // Insert books into the local database
-                    val sortedBooks = books.data?.sortedBy { book ->
+                    val sortedBooks = books.sortedBy { book ->
                         book.releaseDate.toCustomDateFormat()
                     }
 
-                    sortedBooks?.forEach { book ->
-                        viewModelScope.launch {
-                            insertBookUseCase(book)
-                        }
+                    sortedBooks.forEach { book ->
+                            insertBookUseCase(book.copy(title = "ha ha ha"))
                     }
                     _uiState.update {
                         it.copy(
@@ -112,10 +111,19 @@ class BooksViewModel @Inject constructor(
                     }
                 },
                 onFailure = { error ->
+                    _uiState.update {
+                        it.copy(
+                            booksPageState = LoadableUiState.Error(error.message),
+                            isRefreshing = false,
+                            errorMessage = "Failed to sync data. Loading locally stored books."
+                        )
+                    }
+                    delay(3000)
                     // Load locally stored books in case of failure
                     getBooksUseCaseFromRoom.invoke().collect { localBooks ->
                         Log.d("post", "fetchBooks: local  $localBooks")
                         _uiState.update {
+                            Log.d("rost", "fetchBooks: updatestate")
                             it.copy(
                                 booksPageState = localBooks.toLoadableUiState(),
                                 isRefreshing = false,
@@ -128,24 +136,46 @@ class BooksViewModel @Inject constructor(
         }
     }
 
-    // Retry mechanism with backoff delay
     private suspend fun <T> retryWithBackoff(
         retries: Int,
         initialDelay: Long,
-        block: suspend () -> T
+        block: suspend () -> ApiResult<T>
     ): Result<T> {
-        repeat(retries - 1) {
+        var currentDelay = initialDelay
+
+        repeat(retries - 1) { attempt ->
+            Log.d("rost", "retryWithBackoff: attempt ${attempt + 1}")
             try {
-                return Result.success(block())
+                val apiResult = block()
+                if (apiResult.success && apiResult.data != null) {
+                    Log.d("rost", "retryWithBackoff: success on attempt ${attempt + 1}")
+                    return Result.success(apiResult.data)
+                } else {
+                    Log.d("rost", "retryWithBackoff: block returned unsuccessful ApiResult on attempt ${attempt + 1}")
+                    throw IOException(apiResult.error?.message ?: "Unknown error")
+                }
             } catch (e: Exception) {
-                delay(initialDelay)
+                Log.d("rost", "retryWithBackoff: failed on attempt ${attempt + 1}, waiting for $currentDelay ms")
+                delay(currentDelay)
+
             }
         }
+
         return try {
-            Result.success(block())
+            Log.d("rost", "retryWithBackoff: final attempt")
+            val apiResult = block()
+            if (apiResult.success && apiResult.data != null) {
+                Result.success(apiResult.data)
+            } else {
+                Result.failure(IOException(apiResult.error?.message ?: "Unknown error on final attempt"))
+            }
         } catch (e: Exception) {
+            Log.d("rost", "retryWithBackoff: final attempt failed")
             Result.failure(e)
         }
     }
+
+
+
 }
 

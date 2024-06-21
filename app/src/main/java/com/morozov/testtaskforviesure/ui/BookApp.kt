@@ -66,7 +66,7 @@ fun BookApp(
             NavHost(
                 modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
                 navController = navController,
-                startDestination = Splash
+                startDestination = Books
             ) {
                 composablePage<Splash> {
                     SplashScreen(

@@ -1,6 +1,7 @@
 package com.morozov.testtaskforviesure.di
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.morozov.testtaskforviesure.data.ApiService
@@ -84,29 +85,31 @@ object AppModule {
 
 
 
-
-    @Provides
-    @Singleton
-    fun provideUserDatabasePassphrase(@ApplicationContext context: Context) = UserDatabasePassphrase(context)
-
-    @Provides
-    @Singleton
-    fun provideSupportFactory(userDatabasePassphrase: UserDatabasePassphrase) = SupportFactory(userDatabasePassphrase.getPassphrase())
+//
+//    @Provides
+//    @Singleton
+//    fun provideUserDatabasePassphrase(@ApplicationContext context: Context) = UserDatabasePassphrase(context)
+//
+//    @Provides
+//    @Singleton
+//    fun provideSupportFactory(userDatabasePassphrase: UserDatabasePassphrase):SupportFactory {
+//        Log.d("most", "provideSupportFactory: ${userDatabasePassphrase.getPassphrase()}")
+//      return  SupportFactory(userDatabasePassphrase.getPassphrase())}
 
     @Singleton
     @Provides
     fun provideAppDatabase(
         @ApplicationContext
         context: Context,
-        supportFactory: SupportFactory
+       // supportFactory: SupportFactory
     ): BookDatabase {
-
 
       return  Room.databaseBuilder(
             context, BookDatabase::class.java,
             "app_database"
-        ).fallbackToDestructiveMigration()
-          .openHelperFactory(supportFactory)
+        )//.openHelperFactory(supportFactory)
+          .fallbackToDestructiveMigration()
+
             .build()
     }
 

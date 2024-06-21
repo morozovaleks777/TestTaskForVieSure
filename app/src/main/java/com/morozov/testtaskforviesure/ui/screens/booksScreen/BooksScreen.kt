@@ -141,9 +141,8 @@ fun BookList(books: List<Book>,lazyListState:LazyListState, onBookClick: (Book) 
         state = lazyListState
     ){
 
-        items(books+books + books + books) { book ->
-            Text(book.title.orEmpty())
-           // BookListItem(book = book, onBookClick = onBookClick)
+        items(books) { book ->
+            BookListItem(book = book, onBookClick = onBookClick)
         }
     }
 //    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
@@ -198,13 +197,5 @@ fun BookListItem(book: Book, onBookClick: (Book) -> Unit) {
                 )
             }
         }
-    }
-}
-
-
-@Composable
-fun LazyListScope.Booky(books: List<Book>, onBookClick: (Book) -> Unit){
-    books.forEach{book ->
-        BookListItem(book = book, onBookClick = onBookClick)
     }
 }
