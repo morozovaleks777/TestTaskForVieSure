@@ -1,10 +1,12 @@
 package com.morozov.testtaskforviesure
 
-import com.morozov.testtaskforviesure.data.ApiError
-import com.morozov.testtaskforviesure.domain.Book
-import com.morozov.testtaskforviesure.domain.Repository
-import com.morozov.testtaskforviesure.data.ApiResult
-import com.morozov.testtaskforviesure.domain.GetBooksUseCase
+
+import com.morozov.common.ApiError
+import com.morozov.common.ApiResult
+import com.morozov.common.models.Book
+import com.morozov.domain.domain.GetBooksUseCase
+import com.morozov.testtaskforviesure.domain.ApiRepository
+
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -16,7 +18,7 @@ import org.mockito.MockitoAnnotations
 class GetBooksUseCaseFromRoomTest {
 
     @Mock
-    private lateinit var repository: Repository
+    private lateinit var repository: ApiRepository
 
     private lateinit var getBooksUseCase: GetBooksUseCase
 

@@ -1,9 +1,10 @@
 package com.morozov.testtaskforviesure
 
-import com.morozov.testtaskforviesure.data.ApiError
-import com.morozov.testtaskforviesure.data.ApiResult
-import com.morozov.testtaskforviesure.data.LoadableUiState
-import com.morozov.testtaskforviesure.data.toLoadableUiState
+
+import com.morozov.common.ApiError
+import com.morozov.common.ApiResult
+import com.morozov.common.LoadableUiState
+import com.morozov.common.toLoadableUiState
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

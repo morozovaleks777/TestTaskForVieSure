@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.morozov.testtaskforviesure.data.room.BookDao
-import com.morozov.testtaskforviesure.data.room.BookDatabase
-import com.morozov.testtaskforviesure.data.room.BookEntity
+import com.morozov.room.room.BookDao
+import com.morozov.room.room.BookDatabase
+import com.morozov.room.room.BookEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first

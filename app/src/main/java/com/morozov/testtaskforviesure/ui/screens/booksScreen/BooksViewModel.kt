@@ -1,17 +1,17 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
 import android.util.Log
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.morozov.testtaskforviesure.data.ApiResult
-import com.morozov.testtaskforviesure.data.LoadableUiState
-import com.morozov.testtaskforviesure.data.toLoadableUiState
-import com.morozov.testtaskforviesure.domain.Book
-import com.morozov.testtaskforviesure.domain.GetBooksUseCase
+import com.morozov.common.ApiResult
+import com.morozov.common.LoadableUiState
+import com.morozov.common.models.Book
+import com.morozov.common.toLoadableUiState
+import com.morozov.domain.domain.GetBooksUseCase
+import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
+
 import com.morozov.testtaskforviesure.domain.roomUseCases.GetBooksUseCaseFromRoom
-import com.morozov.testtaskforviesure.domain.roomUseCases.InsertBookUseCase
 import com.morozov.testtaskforviesure.navigation.AboutMe
 import com.morozov.testtaskforviesure.navigation.BookDetail
 import com.morozov.testtaskforviesure.navigation.NavigationManager
@@ -96,16 +96,16 @@ class BooksViewModel @Inject constructor(
                 onSuccess = { books ->
                     Log.d("post", "fetchBooks: onsucces")
                     // Insert books into the local database
-                    val sortedBooks = books.sortedBy { book ->
+                    val sortedBooks = books?.sortedBy { book ->
                         book.releaseDate.toCustomDateFormat()
                     }
 
-                    sortedBooks.forEach { book ->
+                    sortedBooks?.forEach { book ->
                             insertBookUseCase(book)
                     }
                     _uiState.update {
                         it.copy(
-                            booksPageState = books.toLoadableUiState(),
+                            booksPageState = (books ?: emptyList()).toLoadableUiState(),
                             isRefreshing = false
                         )
                     }
@@ -140,7 +140,7 @@ class BooksViewModel @Inject constructor(
         retries: Int,
         initialDelay: Long,
         block: suspend () -> ApiResult<T>
-    ): Result<T> {
+    ): Result<T?> {
         var currentDelay = initialDelay
 
         repeat(retries - 1) { attempt ->

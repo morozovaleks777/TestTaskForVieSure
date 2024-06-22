@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Test Task For VieSure"
 include(":app")
- 
+include(":Common")
+include(":room")
+include(":domain")

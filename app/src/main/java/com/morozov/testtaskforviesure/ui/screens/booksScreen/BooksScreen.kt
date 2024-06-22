@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.morozov.common.LoadableUiState
 import com.morozov.testtaskforviesure.R
-import com.morozov.testtaskforviesure.data.LoadableUiState
-import com.morozov.testtaskforviesure.domain.Book
+import com.morozov.common.models.Book
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.ErrorLayout
 import com.morozov.testtaskforviesure.ui.components.LoadingComponent
@@ -133,7 +133,7 @@ private fun prepareTopBarActions(
 }
 
 @Composable
-fun BookList(books: List<Book>,lazyListState:LazyListState, onBookClick: (Book) -> Unit) {
+fun BookList(books: List<Book>, lazyListState:LazyListState, onBookClick: (Book) -> Unit) {
 
     LazyColumn(
         state = lazyListState

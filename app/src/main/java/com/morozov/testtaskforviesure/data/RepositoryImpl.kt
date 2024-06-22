@@ -1,11 +1,13 @@
 package com.morozov.testtaskforviesure.data
 
 import android.util.Log
-import com.morozov.testtaskforviesure.domain.Book
-import com.morozov.testtaskforviesure.domain.Repository
+import com.morozov.common.ApiError
+import com.morozov.common.ApiResult
+import com.morozov.common.models.Book
+import com.morozov.testtaskforviesure.domain.ApiRepository
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val service: ApiService) : Repository {
+class RepositoryImpl @Inject constructor(private val service: ApiService) : ApiRepository {
 
     override suspend fun getBooks(): ApiResult<List<Book>> {
         return try {

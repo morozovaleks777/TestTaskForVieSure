@@ -1,23 +1,15 @@
 package com.morozov.testtaskforviesure.di
 
 import android.content.Context
-import android.util.Log
-import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.morozov.testtaskforviesure.data.ApiService
 import com.morozov.testtaskforviesure.data.RepositoryImpl
-import com.morozov.testtaskforviesure.data.room.BookDao
-import com.morozov.testtaskforviesure.data.room.BookDatabase
-import com.morozov.testtaskforviesure.data.room.RoomRepositoryImpl
-import com.morozov.testtaskforviesure.domain.Repository
-import com.morozov.testtaskforviesure.domain.RoomRepository
-import com.morozov.testtaskforviesure.utils.UserDatabasePassphrase
+import com.morozov.testtaskforviesure.domain.ApiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import net.sqlcipher.database.SupportFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -77,46 +69,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(booksService: ApiService): Repository {
+    fun provideRepository(booksService: ApiService): ApiRepository {
         return RepositoryImpl(booksService)
     }
 
 
-
-
-
-
-    @Provides
-    @Singleton
-    fun provideUserDatabasePassphrase(@ApplicationContext context: Context) = UserDatabasePassphrase(context)
-
-    @Provides
-    @Singleton
-    fun provideSupportFactory(userDatabasePassphrase: UserDatabasePassphrase):SupportFactory {
-      return  SupportFactory(userDatabasePassphrase.getPassphrase())}
-
-    @Singleton
-    @Provides
-    fun provideAppDatabase(
-        @ApplicationContext
-        context: Context,
-        supportFactory: SupportFactory
-    ): BookDatabase {
-
-      return  Room.databaseBuilder(
-            context, BookDatabase::class.java,
-            "book_database"
-        ).openHelperFactory(supportFactory)
-          .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideBookDao(appDatabase: BookDatabase): BookDao =
-        appDatabase.bookDao()
-
-    @Provides
-    fun provideRoomRepository(bookDao: BookDao): RoomRepository = RoomRepositoryImpl(bookDao)
-
 }
+
+

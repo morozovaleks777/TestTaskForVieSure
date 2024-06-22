@@ -1,7 +1,8 @@
 package com.morozov.testtaskforviesure
 
-import com.morozov.testtaskforviesure.data.ApiError
-import com.morozov.testtaskforviesure.data.ApiResult
+
+import com.morozov.common.ApiError
+import com.morozov.common.ApiResult
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test

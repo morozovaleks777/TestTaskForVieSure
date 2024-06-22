@@ -1,13 +1,15 @@
-import com.morozov.testtaskforviesure.data.room.BookEntity
-import com.morozov.testtaskforviesure.data.room.toEntity
-import com.morozov.testtaskforviesure.domain.Book
-import com.morozov.testtaskforviesure.domain.RoomRepository
+
+import com.morozov.common.mappers.toDomainEntity
+import com.morozov.common.models.Book
+import com.morozov.common.models.BookDomainEntity
+import com.morozov.domain.domain.RoomRepository
+import com.morozov.domain.domain.roomUseCases.DeleteBookUseCase
+import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
+import com.morozov.domain.domain.roomUseCases.UpdateBookUseCase
+import com.morozov.room.room.BookEntity
 import com.morozov.testtaskforviesure.domain.roomUseCases.DeleteBookByIdUseCase
-import com.morozov.testtaskforviesure.domain.roomUseCases.DeleteBookUseCase
 import com.morozov.testtaskforviesure.domain.roomUseCases.GetBookByIdUseCase
 import com.morozov.testtaskforviesure.domain.roomUseCases.GetBooksUseCaseFromRoom
-import com.morozov.testtaskforviesure.domain.roomUseCases.InsertBookUseCase
-import com.morozov.testtaskforviesure.domain.roomUseCases.UpdateBookUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -61,7 +63,7 @@ class UseCasesTest {
         deleteBookUseCase.invoke(book)
 
         // Verify the repository method is called with correct parameters
-        verify(roomRepository).deleteBook(book.toEntity())
+        verify(roomRepository).deleteBook(book.toDomainEntity())
     }
 
     @ExperimentalCoroutinesApi
@@ -69,8 +71,8 @@ class UseCasesTest {
     fun `test getBookByIdUseCase`() = runBlocking {
         val bookId = 1
         val mockBook = Book(id = bookId, title = "Book", author = "", description = "", image = "", releaseDate = "", titlee = "")
-        val mockEntity = mockBook.toEntity()
-        val mockFlow: Flow<BookEntity?> = flow { emit(mockEntity) }
+        val mockEntity = mockBook.toDomainEntity()
+        val mockFlow: Flow<BookDomainEntity?> = flow { emit(mockEntity) }
 
         `when`(roomRepository.getBookById(bookId)).thenReturn(mockFlow)
 
@@ -90,8 +92,8 @@ class UseCasesTest {
             Book(id = 1, title = "Book1", author = "", description = "", image = "", releaseDate = "", titlee = ""),
             Book(id = 2, title = "Book2", author = "", description = "", image = "", releaseDate = "", titlee = "")
         )
-        val mockEntities = mockBooks.map { it.toEntity() }
-        val mockFlow: Flow<List<BookEntity>> = flow { emit(mockEntities) }
+        val mockEntities = mockBooks.map { it.toDomainEntity() }
+        val mockFlow: Flow<List<BookDomainEntity>> = flow { emit(mockEntities) }
 
         `when`(roomRepository.getAllBooks()).thenReturn(mockFlow)
 
@@ -112,7 +114,7 @@ class UseCasesTest {
         updateBookUseCase.invoke(book)
 
         // Verify the repository method is called with correct parameters
-        verify(roomRepository).updateBook(book.toEntity())
+        verify(roomRepository).updateBook(book.toDomainEntity())
     }
 
     @Test
@@ -123,6 +125,6 @@ class UseCasesTest {
         insertBookUseCase.invoke(book)
 
         // Verify the repository method is called with correct parameters
-        verify(roomRepository).insertBook(book.toEntity())
+        verify(roomRepository).insertBook(book.toDomainEntity())
     }
 }

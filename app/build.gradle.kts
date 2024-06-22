@@ -66,6 +66,10 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.navigation.testing)
+    implementation(project(":Common"))
+    implementation(project(":Common"))
+    implementation(project(":room"))
+    implementation(project(":domain"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,9 +97,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.bundles.android.room.bundle)
-    // encrypt
-    implementation(libs.encrypting)
-    implementation(libs.security.crypto)
+
     //refresher
      implementation(libs.pullrefresh)
 
