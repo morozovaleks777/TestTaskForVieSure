@@ -101,7 +101,7 @@ class BooksViewModel @Inject constructor(
                     }
 
                     sortedBooks.forEach { book ->
-                            insertBookUseCase(book.copy(title = "ha ha ha"))
+                            insertBookUseCase(book)
                     }
                     _uiState.update {
                         it.copy(

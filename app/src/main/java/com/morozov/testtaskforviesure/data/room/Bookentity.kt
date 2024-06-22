@@ -8,14 +8,14 @@ import androidx.room.PrimaryKey
 data class BookEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0 ,
     val author: String?,
-    @ColumnInfo
+    @ColumnInfo("description")
     val description: String?,
-    @ColumnInfo
+    @ColumnInfo("image")
     val image: String?,
-    @ColumnInfo
+    @ColumnInfo(" releaseDate")
     val releaseDate: String?,
-    @ColumnInfo
+    @ColumnInfo("title")
     val title: String?,
-    @ColumnInfo
+    @ColumnInfo("titlee")
     val titlee: String?
 )
