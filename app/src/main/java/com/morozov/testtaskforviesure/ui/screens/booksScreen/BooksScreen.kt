@@ -41,7 +41,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.morozov.common.LoadableUiState
 import com.morozov.testtaskforviesure.R
-import com.morozov.common.models.Book
+import com.morozov.domain.domain.models.Book
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.ErrorLayout
 import com.morozov.testtaskforviesure.ui.components.LoadingComponent

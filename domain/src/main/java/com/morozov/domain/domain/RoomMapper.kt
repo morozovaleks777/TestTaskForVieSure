@@ -1,7 +1,7 @@
-package com.morozov.common.mappers
+package com.morozov.domain.domain
 
-import com.morozov.common.models.Book
 import com.morozov.common.models.BookDomainEntity
+import com.morozov.domain.domain.models.Book
 
 
 fun BookDomainEntity.toDomain(): Book {

@@ -67,7 +67,6 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.navigation.testing)
     implementation(project(":Common"))
-    implementation(project(":Common"))
     implementation(project(":room"))
     implementation(project(":domain"))
     testImplementation(libs.junit)

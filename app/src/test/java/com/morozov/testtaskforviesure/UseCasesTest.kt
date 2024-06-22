@@ -1,14 +1,13 @@
 
-import com.morozov.common.mappers.toDomainEntity
-import com.morozov.common.models.Book
+import com.morozov.data.mappers.toDomainEntity
+import com.morozov.domain.domain.models.Book
 import com.morozov.common.models.BookDomainEntity
 import com.morozov.domain.domain.RoomRepository
 import com.morozov.domain.domain.roomUseCases.DeleteBookUseCase
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 import com.morozov.domain.domain.roomUseCases.UpdateBookUseCase
-import com.morozov.room.room.BookEntity
 import com.morozov.testtaskforviesure.domain.roomUseCases.DeleteBookByIdUseCase
-import com.morozov.testtaskforviesure.domain.roomUseCases.GetBookByIdUseCase
+import com.morozov.domain.domain.roomUseCases.GetBookByIdUseCase
 import com.morozov.testtaskforviesure.domain.roomUseCases.GetBooksUseCaseFromRoom
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

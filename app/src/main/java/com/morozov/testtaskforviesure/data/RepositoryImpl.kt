@@ -3,8 +3,8 @@ package com.morozov.testtaskforviesure.data
 import android.util.Log
 import com.morozov.common.ApiError
 import com.morozov.common.ApiResult
-import com.morozov.common.models.Book
-import com.morozov.testtaskforviesure.domain.ApiRepository
+import com.morozov.domain.domain.models.Book
+import com.morozov.domain.domain.ApiRepository
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val service: ApiService) : ApiRepository {

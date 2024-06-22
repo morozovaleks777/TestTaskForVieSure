@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.morozov.common.ApiResult
 import com.morozov.common.LoadableUiState
-import com.morozov.common.models.Book
+import com.morozov.domain.domain.models.Book
 import com.morozov.common.toLoadableUiState
 import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase

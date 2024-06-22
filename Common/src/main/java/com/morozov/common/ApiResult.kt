@@ -1,6 +1,6 @@
 package com.morozov.common
 
-import com.morozov.common.models.Book
+
 
 
 data class ApiResult<T>(
@@ -19,7 +19,7 @@ fun <T> ApiResult<T>.toLoadableUiState(): LoadableUiState<T> {
         else -> LoadableUiState.Error(this.error?.message)
     }
 }
-fun  List<Book>.toLoadableUiState(): LoadableUiState<List<Book>> {
+fun <T> List<T>.toLoadableUiState(): LoadableUiState<List<T>> {
     return when {
         true -> LoadableUiState.Available(this)
         else -> LoadableUiState.Error()

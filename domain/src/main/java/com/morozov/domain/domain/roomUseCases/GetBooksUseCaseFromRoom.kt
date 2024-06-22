@@ -1,8 +1,9 @@
 package com.morozov.testtaskforviesure.domain.roomUseCases
 
-import com.morozov.common.mappers.toDomain
-import com.morozov.common.models.Book
+
+import com.morozov.domain.domain.models.Book
 import com.morozov.domain.domain.RoomRepository
+import com.morozov.domain.domain.toDomain
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest

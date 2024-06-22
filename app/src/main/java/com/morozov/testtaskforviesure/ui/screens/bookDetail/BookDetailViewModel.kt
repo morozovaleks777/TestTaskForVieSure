@@ -3,7 +3,7 @@ package com.morozov.testtaskforviesure.ui.screens.bookDetail
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import com.morozov.common.LoadableUiState
-import com.morozov.common.models.Book
+import com.morozov.domain.domain.models.Book
 import com.morozov.testtaskforviesure.navigation.NavigationManager
 import com.morozov.testtaskforviesure.navigation.goBack
 import dagger.hilt.android.lifecycle.HiltViewModel

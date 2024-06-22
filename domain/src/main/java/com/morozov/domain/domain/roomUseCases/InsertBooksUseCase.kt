@@ -2,10 +2,11 @@ package com.morozov.domain.domain.roomUseCases
 
 
 import android.util.Log
-import com.morozov.common.mappers.toDomainEntity
 
-import com.morozov.common.models.Book
+
+import com.morozov.domain.domain.models.Book
 import com.morozov.domain.domain.RoomRepository
+import com.morozov.domain.domain.toDomainEntity
 import javax.inject.Inject
 
 class InsertBookUseCase @Inject constructor(

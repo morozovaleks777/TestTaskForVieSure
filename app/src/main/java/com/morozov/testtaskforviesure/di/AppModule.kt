@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.GsonBuilder
 import com.morozov.testtaskforviesure.data.ApiService
 import com.morozov.testtaskforviesure.data.RepositoryImpl
-import com.morozov.testtaskforviesure.domain.ApiRepository
+import com.morozov.domain.domain.ApiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

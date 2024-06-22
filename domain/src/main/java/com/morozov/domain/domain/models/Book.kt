@@ -1,4 +1,4 @@
-package com.morozov.common.models
+package com.morozov.domain.domain.models
 
 
 import java.util.UUID

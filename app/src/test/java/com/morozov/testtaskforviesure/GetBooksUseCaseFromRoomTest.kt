@@ -3,9 +3,9 @@ package com.morozov.testtaskforviesure
 
 import com.morozov.common.ApiError
 import com.morozov.common.ApiResult
-import com.morozov.common.models.Book
+import com.morozov.domain.domain.models.Book
 import com.morozov.domain.domain.GetBooksUseCase
-import com.morozov.testtaskforviesure.domain.ApiRepository
+import com.morozov.domain.domain.ApiRepository
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
