@@ -1,16 +1,26 @@
 package com.morozov.testtaskforviesure.ui
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.pm.ActivityInfo
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -47,6 +57,10 @@ fun BookApp(
 ) {
     val navController = rememberNavController()
     var topBarState by remember { mutableStateOf(TopBarState()) }
+    val isNeedFullScreen = rememberSaveable {
+        mutableStateOf(false)
+    }
+    UpdateSystemUIVisibilityStates(isNeedFullScreen)
 
     BookAppEventEffect(
         navController = navController,
@@ -58,7 +72,7 @@ fun BookApp(
 
         ) {
         Scaffold(
-            modifier = Modifier,
+            modifier = Modifier.fillMaxSize(),
             topBar = { BookAppBar(topBarState) }
 
         ) { paddingValues ->
@@ -66,7 +80,7 @@ fun BookApp(
             NavHost(
                 modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
                 navController = navController,
-                startDestination = Books
+                startDestination = Splash
             ) {
                 composablePage<Splash> {
                     SplashScreen(
@@ -118,5 +132,35 @@ private fun BookAppEventEffect(
 
                 }
             }
+    }
+}
+
+@SuppressLint("SourceLockedOrientationActivity")
+@Composable
+private fun UpdateSystemUIVisibilityStates(
+    isPlayerFullScreen: MutableState<Boolean>,
+) {
+    val context = LocalContext.current
+
+    (context as Activity?)?.run {
+        val windowInsetsController =
+            WindowCompat.getInsetsController(window, window.decorView)
+        // Configure the behavior of the hidden system bars.
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        if (isPlayerFullScreen.value) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
+            windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
+        } else {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.show(WindowInsetsCompat.Type.navigationBars())
+            windowInsetsController.show(WindowInsetsCompat.Type.statusBars())
+        }
     }
 }

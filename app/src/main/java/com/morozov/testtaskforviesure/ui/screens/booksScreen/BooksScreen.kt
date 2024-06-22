@@ -1,7 +1,6 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
 import android.util.Log
-import android.widget.TextView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -128,7 +126,7 @@ private fun prepareTopBarActions(
         TopBarAction(
             icon = Icons.Default.Person,
             onClick = { sendAction(BooksAction.AboutMe) },
-            contentDescription = "app bar button mute"
+            contentDescription = "person"
         ),
 
         )
@@ -141,7 +139,7 @@ fun BookList(books: List<Book>,lazyListState:LazyListState, onBookClick: (Book) 
         state = lazyListState
     ){
 
-        items(books) { book ->
+        items(books,key = {it.key}) { book ->
             BookListItem(book = book, onBookClick = onBookClick)
         }
     }

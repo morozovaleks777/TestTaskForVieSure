@@ -9,29 +9,29 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BookModelItem(
     @SerialName("author")
-    val author: String,
+    val author: String?,
     @SerialName("description")
-    val description: String,
+    val description: String?,
     @SerialName("id")
-    val id: Int,
+    val id: Int?,
     @SerialName("image")
-    val image: String,
+    val image: String?,
     @SerialName("release_date")
-    val releaseDate: String,
+    val releaseDate: String?,
     @SerialName("title")
-    val title: String,
+    val title: String?,
     @SerialName("titlee")
-    val titlee: String
+    val titlee: String?
 )
 
 fun BookModelItem.toDomain(): Book {
     return Book(
-        author = this.author,
-        description = this.description,
-        id = this.id,
-        image = this.image,
+        author = this.author.orEmpty(),
+        description = this.description.orEmpty(),
+        id = this.id ?: 0,
+        image = this.image.orEmpty(),
         releaseDate = this.releaseDate.toCustomDateFormat(),
-        title = this.title,
-        titlee = this.titlee
+        title = this.title.orEmpty(),
+        titlee = this.titlee.orEmpty()
     )
 }

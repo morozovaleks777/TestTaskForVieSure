@@ -2,12 +2,12 @@ package com.morozov.testtaskforviesure.ui.screens.bookDetail
 
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -88,6 +89,7 @@ fun BookDetailLayout(book: BookDetail) {
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)
     ) {
+        val releaseDate = book.releaseDate.let{ if(it.isEmpty()) "unknown date"  else book.releaseDate}
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current).data(data = book.image)
@@ -110,18 +112,21 @@ fun BookDetailLayout(book: BookDetail) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = book.releaseDate ?: "",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.End,
+            text = releaseDate  ,
             style = AppTypography.sub2,
             color = Grey
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            modifier = Modifier.verticalScroll(rememberScrollState()),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
             text = book.description ,
             style = AppTypography.sub1
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
+            modifier = Modifier.navigationBarsPadding(),
             text = "Author: ${book.author}",
             style = AppTypography.sub2,
             color = Grey

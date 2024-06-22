@@ -62,7 +62,7 @@ private fun SplashLayout(
     ) {
         Image(
             modifier = Modifier.width(imageWidth),
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.logo_image),
             contentScale = ContentScale.FillWidth,
             contentDescription = "logo image"
         )

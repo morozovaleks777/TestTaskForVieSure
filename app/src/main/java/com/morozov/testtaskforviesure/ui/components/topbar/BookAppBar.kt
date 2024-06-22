@@ -1,6 +1,7 @@
 package com.morozov.testtaskforviesure.ui.components.topbar
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -94,8 +95,8 @@ fun BookAppBar(
 @Composable
 private fun DefaultTitle() {
     Icon(
-        modifier = Modifier.width(160.dp),
-        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        modifier = Modifier.width(80.dp).height(32.dp),
+        painter = painterResource(id = R.drawable.logo_image),
         tint = Color.Unspecified,
         contentDescription = "logo"
     )

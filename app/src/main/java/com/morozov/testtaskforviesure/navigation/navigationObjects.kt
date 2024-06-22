@@ -18,7 +18,7 @@ data class BookDetail(
     val description: String = "",
     val id: Int = 0,
     val image: String = "",
-    val releaseDate: String? = "",
+    val releaseDate: String = "",
     val title: String = "",
     val titlee: String = ""
 ) : NavigationObject()
