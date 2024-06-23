@@ -9,7 +9,32 @@ lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 composeNavigation = "2.8.0-beta03"
-serialization = "1.7.0"
+serialization = "1.6.3"
+hilt = "2.50"
+hiltNavigation = "1.2.0"
+retrofit2 = "2.9.0"
+okHttp3 = "4.12.0"
+room = "2.6.1"
+coilVersion = "2.6.0"
+ksp = "1.9.0-1.0.13"
+encrypt = "4.5.3"
+security = "1.0.0"
+pullRefresh = "1.0.0"
+mockitocore = "3.11.2"
+mockitokotlin = "3.2.0"
+mockitoinline = "3.11.2"
+mockitorelease ="1.5.4"
+coroutinestest = "1.6.4"
+coretesting = "2.2.0"
+coreKtxVersion = "1.5.0"
+junitKtx = "1.1.5"
+navigationTesting = "2.7.7"
+mockk = "1.12.0"
+appcompat = "1.7.0"
+material = "1.12.0"
+timber  = "5.0.1"
+media3Common = "1.3.1"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,8 +54,60 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
 
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-compose_navigation = {module = "androidx.hilt:hilt-navigation-compose",version.ref = "hiltNavigation"}
+
+okHttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp3" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
+retrofitConverterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
+
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
+
+encrypting = {module = "net.zetetic:android-database-sqlcipher",version.ref = "encrypt"}
+security-crypto ={ module ="androidx.security:security-crypto",version.ref = "security"}
+pullrefresh = { module = "eu.bambooapps:compose-material3-pullrefresh", version.ref = "pullRefresh"}
+
+
+testmockito-core = {module = 'org.mockito:mockito-core',version.ref = "mockitocore"}
+testmockito-kotlin  = {module = 'org.mockito.kotlin:mockito-kotlin',version.ref = "mockitokotlin"}
+testmockito-inline =  {module = 'org.mockito:mockito-inline',version.ref = "mockitoinline"}
+testmockito-release  = {module = 'org.powermock:powermock-mockito-release-full',version.ref = "mockitorelease"}
+
+
+# AndroidX Core Testing for ViewModel testing
+testcore-testing = {module ='androidx.arch.core:core-testing',version.ref = "coretesting" }
+# Kotlin coroutines test library
+testcoroutines-test = {module ='org.jetbrains.kotlinx:kotlinx-coroutines-test',version.ref = "coroutinestest" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTesting" }
+
+mockk = {module = "io.mockk:mockk",version.ref = "mockk"}
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+timber = {module = 'com.jakewharton.timber:timber',name = "timber",version.ref = "timber"}
+androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
+kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="ksp" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+
+
+
+
+[bundles]
+android-room-bundle = ["androidx-room-ktx", "androidx-room-runtime"]

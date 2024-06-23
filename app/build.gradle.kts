@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlinAndroidKsp)
+    alias(libs.plugins.hiltAndroid)
+
 }
 
 android {
@@ -59,6 +63,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.core.ktx)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.navigation.testing)
+    implementation(project(":сommon"))
+    implementation(project(":room"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":navigation"))
+    implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +79,29 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
+    //hilt
+    api (libs.hilt.android)
+    api(libs.hilt.compose.navigation)
+    ksp(libs.dagger.compiler)
+    ksp(libs.hilt.compiler)
+    //coil
+    implementation(libs.coil)
+
+    //refresher
+     implementation(libs.pullrefresh)
+    //timber
+    implementation(libs.timber)
+
+    testImplementation(libs.testmockito.core)
+    testImplementation(libs.testmockito.kotlin)
+    testImplementation(libs.testmockito.release)
+    testImplementation(libs.testmockito.inline)
+
+    testImplementation(libs.testcore.testing)
+    testImplementation(libs.testcoroutines.test)
+    testImplementation(libs.mockk)
+
 }
