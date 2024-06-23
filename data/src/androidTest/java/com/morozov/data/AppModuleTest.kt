@@ -1,15 +1,14 @@
-package com.morozov.testtaskforviesure
+package com.morozov.data
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.morozov.data.network.ApiService
-import com.morozov.data.network.AppModule
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
+
 
 class AppModuleTest {
 
