@@ -97,7 +97,6 @@ private fun NavHostGraph(
             SplashScreen(
                 modifier = Modifier,
                 viewModel = hiltViewModel<SplashViewModel>(),
-                navController = navController
             )
         }
         composablePage<Books> {
