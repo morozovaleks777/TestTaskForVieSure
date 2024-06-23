@@ -1,21 +1,16 @@
 package com.morozov.testtaskforviesure.utils
 
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.CubicBezierEasing
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -61,12 +56,12 @@ object Transitions {
         slideOutOfContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.End,
             animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_01,
+                durationMillis = AnimationDuration.SLOW_02,
                 easing = STANDARD_ACCELERATE
             )
         ) + fadeOut(
             animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_01,
+                durationMillis = AnimationDuration.SLOW_02,
                 easing = STANDARD_ACCELERATE
             )
         )
@@ -89,41 +84,3 @@ object AppAnimationEasing {
     val LINEAR = CubicBezierEasing(0f, 0f, 1f, 1f)
 }
 
-// TODO use for non screen animation
-@Composable
-fun AnimatedContentWrapper(
-    content: @Composable () -> Unit
-) {
-    val transitionState = remember { MutableTransitionState(false) }
-    transitionState.targetState = true
-    Box(modifier = Modifier.fillMaxSize())
-    AnimatedVisibility(
-        visibleState = transitionState,
-        enter = slideInHorizontally(
-            initialOffsetX = { fullWidth -> fullWidth },
-            animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_DECELERATE
-            )
-        ) + fadeIn(
-            animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_DECELERATE
-            )
-        ),
-        exit = slideOutHorizontally(
-            targetOffsetX = { fullWidth -> fullWidth },
-            animationSpec = tween(
-                durationMillis = AnimationDuration.MEDIUM_01,
-                easing = AppAnimationEasing.STANDARD_ACCELERATE
-            )
-        ) + fadeOut(
-            animationSpec = tween(
-                durationMillis = AnimationDuration.MEDIUM_01,
-                easing = AppAnimationEasing.STANDARD_ACCELERATE
-            )
-        )
-    ) {
-        content()
-    }
-}
