@@ -29,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -85,7 +86,7 @@ fun BooksScreen(
         )
     }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(uiState) {
         if (uiState.booksPageState !is LoadableUiState.Available) {
             viewModel.send(BooksAction.GetBooksData())
         }
@@ -99,9 +100,9 @@ fun BooksScreen(
         when (uiState.booksPageState) {
             is LoadableUiState.Available -> {
                 val books =
-                    remember { (uiState.booksPageState as LoadableUiState.Available<List<Book>>).data }
+                    rememberUpdatedState( (uiState.booksPageState as LoadableUiState.Available<List<Book>>).data )
                 BookList(
-                    books = books,
+                    books = books.value,
                     lazyListState = lazyListState
                 ) { book ->
                     viewModel.send(BooksAction.GoToBookDetail(book))

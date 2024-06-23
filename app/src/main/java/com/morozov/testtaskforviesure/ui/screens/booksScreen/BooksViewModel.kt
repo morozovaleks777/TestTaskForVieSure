@@ -1,5 +1,6 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
+import android.util.Log
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.morozov.common.toLoadableUiState
 import com.morozov.common.utils.toCustomDateFormat
 import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.models.Book
+import com.morozov.domain.domain.roomUseCases.DeleteBookUseCase
 import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 import com.morozov.navigation.AboutMe
@@ -81,6 +83,7 @@ class BooksViewModel @Inject constructor(
     // Fetch books data with retry and local fallback mechanism
     private fun fetchBooks(isRefreshing: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
+
             _uiState.update {
                 it.copy(
                     isRefreshing = isRefreshing,
@@ -92,8 +95,10 @@ class BooksViewModel @Inject constructor(
                 getBooksUseCase.invoke()
             }
 
+
             result.fold(
                 onSuccess = { books ->
+                    Log.d("post", "fetchBooks:  onSuccess")
                     // Insert books into the local database
                     val sortedBooks = books?.sortedBy { book ->
                         book.releaseDate.toCustomDateFormat()
@@ -104,11 +109,12 @@ class BooksViewModel @Inject constructor(
                     }
                     _uiState.update {
                         it.copy(
-                            booksPageState = (books ?: emptyList()).toLoadableUiState(),
+                            booksPageState = (sortedBooks ?: emptyList()).toLoadableUiState(),
                             isRefreshing = false,
                             title = "Books from api"
                         )
                     }
+                    Log.d("post", "fetchBooks:  onSuccess - ${uiState.value}")
                 },
                 onFailure = { error ->
                     _uiState.update {
@@ -121,9 +127,10 @@ class BooksViewModel @Inject constructor(
                     delay(3000)
                     // Load locally stored books in case of failure
                     getBooksUseCaseFromRoom.invoke().collect { localBooks ->
+                        val lb = localBooks.map { it.copy(title = "hohoho") }
                         _uiState.update {
                             it.copy(
-                                booksPageState = localBooks.toLoadableUiState(),
+                                booksPageState = lb.toLoadableUiState(),
                                 isRefreshing = false,
                                 errorMessage = "Failed to sync data. Showing locally stored books.",
                                 title = "Books from database"
@@ -168,5 +175,7 @@ class BooksViewModel @Inject constructor(
             Result.failure(e)
         }
     }
+
+
 }
 
