@@ -24,6 +24,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -117,6 +118,7 @@ class BooksViewModel @Inject constructor(
                     Log.d("post", "fetchBooks:  onSuccess - ${uiState.value}")
                 },
                 onFailure = { error ->
+                    Log.d("post", "fetchBooks:  onFailure")
                     _uiState.update {
                         it.copy(
                             booksPageState = LoadableUiState.Error(error.message),
@@ -125,17 +127,15 @@ class BooksViewModel @Inject constructor(
                         )
                     }
                     delay(3000)
-                    // Load locally stored books in case of failure
-                    getBooksUseCaseFromRoom.invoke().collect { localBooks ->
-                        val lb = localBooks.map { it.copy(title = "hohoho") }
+
+                        val localBooks = getBooksUseCaseFromRoom.invoke()
+
                         _uiState.update {
                             it.copy(
-                                booksPageState = lb.toLoadableUiState(),
+                                booksPageState = localBooks.toLoadableUiState(),
                                 isRefreshing = false,
-                                errorMessage = "Failed to sync data. Showing locally stored books.",
                                 title = "Books from database"
                             )
-                        }
                     }
                 }
             )

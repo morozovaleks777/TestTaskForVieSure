@@ -13,7 +13,6 @@ class InsertBookUseCase @Inject constructor(
     private val bookRepository: RoomRepository
 ) {
     suspend operator fun invoke(book: Book) {
-        Log.d("post", "invoke: ${book.title}")
         bookRepository.insertBook(book.toDomainEntity() )
     }
 }

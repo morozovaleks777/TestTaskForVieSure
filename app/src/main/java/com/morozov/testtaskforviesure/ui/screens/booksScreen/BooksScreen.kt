@@ -1,6 +1,5 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -33,16 +32,18 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.morozov.common.LoadableUiState
-import com.morozov.testtaskforviesure.R
 import com.morozov.domain.domain.models.Book
+import com.morozov.testtaskforviesure.R
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.ErrorLayout
 import com.morozov.testtaskforviesure.ui.components.LoadingComponent
@@ -62,7 +63,7 @@ fun BooksScreen(
 ) {
     val topBarStateUpdater = LocalTopBarUpdater.current
     val topBarActions = prepareTopBarActions(sendAction = viewModel.send)
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val refreshing = uiState.isRefreshing
     val state = rememberPullRefreshState(
@@ -86,7 +87,7 @@ fun BooksScreen(
         )
     }
 
-    LaunchedEffect(uiState) {
+    LaunchedEffect(Unit) {
         if (uiState.booksPageState !is LoadableUiState.Available) {
             viewModel.send(BooksAction.GetBooksData())
         }
@@ -100,9 +101,9 @@ fun BooksScreen(
         when (uiState.booksPageState) {
             is LoadableUiState.Available -> {
                 val books =
-                    rememberUpdatedState( (uiState.booksPageState as LoadableUiState.Available<List<Book>>).data )
+                    remember{ (uiState.booksPageState as LoadableUiState.Available<List<Book>>).data }
                 BookList(
-                    books = books.value,
+                    books = books,
                     lazyListState = lazyListState
                 ) { book ->
                     viewModel.send(BooksAction.GoToBookDetail(book))
@@ -173,21 +174,20 @@ fun BookListItem(book: Book, onBookClick: (Book) -> Unit) {
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
         ) {
             Image(
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(LocalContext.current).data(
-                        data =
-                        book.image
-                    )
-                        .apply<ImageRequest.Builder>(block = fun ImageRequest.Builder.() {
+                        data = book.image
+                    ).apply(block = fun ImageRequest.Builder.() {
                             placeholder(R.drawable.placeholder_image)
                             error(R.drawable.placeholder_image)
                             memoryCachePolicy(CachePolicy.ENABLED)
                         }).build()
                 ),
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
@@ -195,14 +195,14 @@ fun BookListItem(book: Book, onBookClick: (Book) -> Unit) {
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = book.title ?: "Unknown Title",
+                    text = book.title,
                     style = AppTypography.cta,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = book.description ?: "No description",
+                    text = book.description ,
                     style = AppTypography.sub1,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis

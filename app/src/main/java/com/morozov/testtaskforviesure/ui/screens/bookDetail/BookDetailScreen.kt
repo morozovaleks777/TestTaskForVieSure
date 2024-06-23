@@ -95,7 +95,7 @@ fun BookDetailLayout(book: BookDetail) {
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current).data(data = book.image)
-                    .apply<ImageRequest.Builder>(block = fun ImageRequest.Builder.() {
+                    .apply(block = fun ImageRequest.Builder.() {
                         placeholder(drawable.placeholder_image)
                         error(drawable.placeholder_image)
                     }).build()

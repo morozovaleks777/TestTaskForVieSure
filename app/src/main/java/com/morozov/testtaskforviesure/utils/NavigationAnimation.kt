@@ -56,12 +56,12 @@ object Transitions {
         slideOutOfContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.End,
             animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_02,
+                durationMillis = AnimationDuration.SLOW_01,
                 easing = STANDARD_ACCELERATE
             )
         ) + fadeOut(
             animationSpec = tween(
-                durationMillis = AnimationDuration.SLOW_02,
+                durationMillis = AnimationDuration.SLOW_01,
                 easing = STANDARD_ACCELERATE
             )
         )

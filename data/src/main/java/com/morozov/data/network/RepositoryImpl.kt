@@ -12,7 +12,6 @@ class RepositoryImpl @Inject constructor(private val service: ApiService) : ApiR
     override suspend fun getBooks(): ApiResult<List<Book>> {
         return try {
             val result = service.getBooks()
-            Log.d("post", "getBooks: $result")
             ApiResult(
                 success = true,
                 data = result.map { it.toDomain() },
