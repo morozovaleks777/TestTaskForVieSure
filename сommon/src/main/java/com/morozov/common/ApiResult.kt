@@ -1,8 +1,6 @@
 package com.morozov.common
 
 
-
-
 data class ApiResult<T>(
     val success: Boolean,
     val data: T?,
@@ -19,6 +17,7 @@ fun <T> ApiResult<T>.toLoadableUiState(): LoadableUiState<T> {
         else -> LoadableUiState.Error(this.error?.message)
     }
 }
+
 fun <T> List<T>.toLoadableUiState(): LoadableUiState<List<T>> {
     return when {
         true -> LoadableUiState.Available(this)

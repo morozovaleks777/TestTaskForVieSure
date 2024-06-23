@@ -52,4 +52,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     //serialization
     implementation(libs.kotlinx.serialization.json)
+    //timber
+    implementation(libs.timber)
 }

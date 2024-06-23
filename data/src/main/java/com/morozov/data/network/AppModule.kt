@@ -17,6 +17,7 @@ import javax.inject.Singleton
 
 
 private const val BASE_URL = "https://c27b2d72-8d9c-4aa0-b549-7ae7e5666815.mock.pstmn.io/"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

@@ -87,15 +87,19 @@ fun BooksScreen(
         }
     }
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .pullRefresh(state)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pullRefresh(state)
+    ) {
         when (uiState.booksPageState) {
             is LoadableUiState.Available -> {
-                val books = remember{(uiState.booksPageState as LoadableUiState.Available<List<Book>>).data}
+                val books =
+                    remember { (uiState.booksPageState as LoadableUiState.Available<List<Book>>).data }
                 BookList(
                     books = books,
-                    lazyListState = lazyListState) { book ->
+                    lazyListState = lazyListState
+                ) { book ->
                     viewModel.send(BooksAction.GoToBookDetail(book))
                 }
                 PullRefreshIndicator(refreshing, state, Modifier.align(Alignment.TopCenter))
@@ -133,13 +137,13 @@ private fun prepareTopBarActions(
 }
 
 @Composable
-fun BookList(books: List<Book>, lazyListState:LazyListState, onBookClick: (Book) -> Unit) {
+fun BookList(books: List<Book>, lazyListState: LazyListState, onBookClick: (Book) -> Unit) {
 
     LazyColumn(
         state = lazyListState
-    ){
+    ) {
 
-        items(books,key = {it.key}) { book ->
+        items(books, key = { it.key }) { book ->
             BookListItem(book = book, onBookClick = onBookClick)
         }
     }
@@ -157,7 +161,10 @@ fun BookListItem(book: Book, onBookClick: (Book) -> Unit) {
             .fillMaxWidth()
             .padding(8.dp)
             .clickable { onBookClick(book) },
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp, pressedElevation = 2.dp)
+        elevation = CardDefaults.elevatedCardElevation(
+            defaultElevation = 4.dp,
+            pressedElevation = 2.dp
+        )
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -165,8 +172,10 @@ fun BookListItem(book: Book, onBookClick: (Book) -> Unit) {
         ) {
             Image(
                 painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current).data(data =
-                    book.image)
+                    ImageRequest.Builder(LocalContext.current).data(
+                        data =
+                        book.image
+                    )
                         .apply<ImageRequest.Builder>(block = fun ImageRequest.Builder.() {
                             placeholder(R.drawable.placeholder_image)
                             error(R.drawable.placeholder_image)

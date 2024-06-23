@@ -7,9 +7,9 @@ import androidx.security.crypto.MasterKeys
 import java.io.File
 import java.security.SecureRandom
 
-class UserDatabasePassphrase (private val context: Context) {
+class UserDatabasePassphrase(private val context: Context) {
 
-    fun getPassphrase(): ByteArray{
+    fun getPassphrase(): ByteArray {
         val file = File(context.filesDir, "user_passphrase.bin")
 
         val encryptedFile = EncryptedFile.Builder(
@@ -19,23 +19,22 @@ class UserDatabasePassphrase (private val context: Context) {
             EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
         ).build()
 
-        return if(file.exists()){
+        return if (file.exists()) {
             encryptedFile.openFileInput().use { it.readBytes() }
 
         } else {
-            generatePassphrase().also {
-                    passPhrase ->
+            generatePassphrase().also { passPhrase ->
                 encryptedFile.openFileOutput().use { it.write(passPhrase) }
             }
         }
     }
 
-    private fun generatePassphrase(): ByteArray{
+    private fun generatePassphrase(): ByteArray {
         val random = SecureRandom.getInstanceStrong()
         val result = ByteArray(32)
 
         random.nextBytes(result)
-        while (result.contains(0)){
+        while (result.contains(0)) {
             random.nextBytes(result)
         }
 

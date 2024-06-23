@@ -7,7 +7,6 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 
-
 fun String?.toCustomDateFormat(): String {
     if (this.isNullOrBlank()) {
         return ""

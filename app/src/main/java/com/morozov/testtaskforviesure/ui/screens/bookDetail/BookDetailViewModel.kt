@@ -21,12 +21,14 @@ data class BookDetailUiState(
 
 sealed class BookDetailAction {
     data class ShowToast(val message: String) : BookDetailAction()
-    data object  GoBack : BookDetailAction()
+    data object GoBack : BookDetailAction()
 
 }
+
 @HiltViewModel
-class BookDetailViewModel@Inject constructor(
-    private val navigationManager: NavigationManager,):ViewModel() {
+class BookDetailViewModel @Inject constructor(
+    private val navigationManager: NavigationManager,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(BookDetailUiState())
     val uiState: StateFlow<BookDetailUiState> = _uiState.asStateFlow()

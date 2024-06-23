@@ -1,22 +1,27 @@
 package com.morozov.testtaskforviesure.ui.screens.splash
 
-import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
+import com.morozov.navigation.Books
+import com.morozov.navigation.NavigationManager
+import com.morozov.navigation.goToMain
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-@Stable
-data class SplashUiState(
-    val splashMessage: String = "DailyWire Plus",
-)
 
 sealed class SplashAction {
     data object GoToMain : SplashAction()
 }
 
-class SplashViewModel (
+@HiltViewModel
+class SplashViewModel @Inject constructor(
+    private val navigationManager: NavigationManager,
+) : ViewModel() {
 
-) :  ViewModel() {
-
-
-
+    val send: (SplashAction) -> Unit = { action ->
+        when (action) {
+            is SplashAction.GoToMain -> {
+                navigationManager.goToMain(Books)
+            }
+        }
+    }
 }

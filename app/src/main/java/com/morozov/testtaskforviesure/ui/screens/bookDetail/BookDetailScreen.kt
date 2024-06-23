@@ -40,19 +40,21 @@ import com.morozov.testtaskforviesure.utils.clickableNoRipple
 fun BookDetailScreen(
     args: BookDetail,
     viewModel: BookDetailViewModel
-){
+) {
     val topBarStateUpdater = LocalTopBarUpdater.current
     val topBarActions = prepareTopBarActions(sendAction = viewModel.send)
     LaunchedEffect(Unit) {
         topBarStateUpdater(
             TopBarState(
-                customBackView = { Icon(
-                    modifier = Modifier
-                        .clickableNoRipple { viewModel.send(BookDetailAction.GoBack) },
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Grey // Set the desired color here
-                )},
+                customBackView = {
+                    Icon(
+                        modifier = Modifier
+                            .clickableNoRipple { viewModel.send(BookDetailAction.GoBack) },
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Grey // Set the desired color here
+                    )
+                },
                 isCenterAligned = true,
                 showTitle = true,
                 customTitleView = { Text(args.title) },
@@ -62,9 +64,8 @@ fun BookDetailScreen(
             )
         )
     }
-   BookDetailLayout(book = args)
+    BookDetailLayout(book = args)
 }
-
 
 
 @Composable
@@ -78,18 +79,19 @@ private fun prepareTopBarActions(
 //            contentDescription = "app bar button mute"
 //        ),
 
-        )
+    )
 }
-
 
 
 @Composable
 fun BookDetailLayout(book: BookDetail) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(16.dp)
     ) {
-        val releaseDate = book.releaseDate.let{ if(it.isEmpty()) "unknown date"  else book.releaseDate}
+        val releaseDate =
+            book.releaseDate.let { if (it.isEmpty()) "unknown date" else book.releaseDate }
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current).data(data = book.image)
@@ -107,21 +109,23 @@ fun BookDetailLayout(book: BookDetail) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = book.title ,
+            text = book.title,
             style = AppTypography.h5
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.End,
-            text = releaseDate  ,
+            text = releaseDate,
             style = AppTypography.sub2,
             color = Grey
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
-            text = book.description ,
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState()),
+            text = book.description,
             style = AppTypography.sub1
         )
         Spacer(modifier = Modifier.height(16.dp))

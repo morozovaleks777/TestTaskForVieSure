@@ -12,7 +12,7 @@ class RoomRepositoryImpl @Inject constructor(
 ) : RoomRepository {
     override fun getAllBooks(): Flow<List<BookDomainEntity>> =
         bookDao.getAllBooks().map { entities ->
-            entities.map { entity -> entity.toDomainEntity()}
+            entities.map { entity -> entity.toDomainEntity() }
         }
 
     override fun getBookById(id: Int): Flow<BookDomainEntity?> =

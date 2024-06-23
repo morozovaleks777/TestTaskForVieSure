@@ -11,7 +11,7 @@ import com.morozov.common.toLoadableUiState
 import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 
-import com.morozov.testtaskforviesure.domain.roomUseCases.GetBooksUseCaseFromRoom
+import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import com.morozov.common.utils.toCustomDateFormat
 import com.morozov.navigation.AboutMe
 import com.morozov.navigation.BookDetail
@@ -36,6 +36,7 @@ data class BooksUiState(
     val isRefreshing: Boolean = false,
     val errorMessage: String? = null
 )
+
 @Stable
 sealed class BooksAction {
     data object AboutMe : BooksAction()
@@ -101,7 +102,7 @@ class BooksViewModel @Inject constructor(
                     }
 
                     sortedBooks?.forEach { book ->
-                            insertBookUseCase(book)
+                        insertBookUseCase(book)
                     }
                     _uiState.update {
                         it.copy(
@@ -151,11 +152,17 @@ class BooksViewModel @Inject constructor(
                     Log.d("rost", "retryWithBackoff: success on attempt ${attempt + 1}")
                     return Result.success(apiResult.data)
                 } else {
-                    Log.d("rost", "retryWithBackoff: block returned unsuccessful ApiResult on attempt ${attempt + 1}")
+                    Log.d(
+                        "rost",
+                        "retryWithBackoff: block returned unsuccessful ApiResult on attempt ${attempt + 1}"
+                    )
                     throw IOException(apiResult.error?.message ?: "Unknown error")
                 }
             } catch (e: Exception) {
-                Log.d("rost", "retryWithBackoff: failed on attempt ${attempt + 1}, waiting for $currentDelay ms")
+                Log.d(
+                    "rost",
+                    "retryWithBackoff: failed on attempt ${attempt + 1}, waiting for $currentDelay ms"
+                )
                 delay(currentDelay)
 
             }
@@ -167,14 +174,17 @@ class BooksViewModel @Inject constructor(
             if (apiResult.success && apiResult.data != null) {
                 Result.success(apiResult.data)
             } else {
-                Result.failure(IOException(apiResult.error?.message ?: "Unknown error on final attempt"))
+                Result.failure(
+                    IOException(
+                        apiResult.error?.message ?: "Unknown error on final attempt"
+                    )
+                )
             }
         } catch (e: Exception) {
             Log.d("rost", "retryWithBackoff: final attempt failed")
             Result.failure(e)
         }
     }
-
 
 
 }

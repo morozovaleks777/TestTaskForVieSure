@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class NavigationObject
 
-
 @Serializable
 data object Splash : NavigationObject()
 

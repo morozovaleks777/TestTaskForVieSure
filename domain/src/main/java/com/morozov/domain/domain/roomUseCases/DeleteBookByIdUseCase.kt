@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.domain.roomUseCases
+package com.morozov.domain.domain.roomUseCases
 
 import com.morozov.domain.domain.RoomRepository
 import javax.inject.Inject

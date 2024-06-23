@@ -35,7 +35,7 @@ object LifecycleModule {
         @ActivityRetainedScoped coroutineScope: CoroutineScope,
         @Dispatcher(AppDispatchers.DEFAULT) dispatcher: CoroutineDispatcher,
     ): NavigationManager =
-       NavigationManager(
+        NavigationManager(
             coroutineScope = coroutineScope,
             dispatcher = dispatcher
         )

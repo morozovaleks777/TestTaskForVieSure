@@ -14,33 +14,30 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.morozov.navigation.Books
-import com.morozov.navigation.Splash
-import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
 import com.morozov.testtaskforviesure.R
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
+import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun SplashScreen(
     modifier: Modifier,
     viewModel: SplashViewModel,
-    navController: NavHostController,
 ) {
-
 
     val topBarStateUpdater = LocalTopBarUpdater.current
 
 
     LaunchedEffect(Unit) {
         topBarStateUpdater(TopBarState(showAppBar = false))
-//         CoroutineScope(Dispatchers.Default).launch {
-        //  Simulate loading data
-        delay(800)
-        navController.navigate(Books) {
-            popUpTo(Splash) { inclusive = true }
+        CoroutineScope(Dispatchers.Default).launch {
+            //  Simulate loading data
+            delay(800)
+            viewModel.send(SplashAction.GoToMain)
         }
     }
 

@@ -13,6 +13,15 @@ fun NavigationManager.goToAboutMe(aboutMe: AboutMe) {
     goTo(aboutMe)
 }
 
+fun NavigationManager.goToMain(books: Books) {
+    goTo(books)
+}
+
+
+
 fun NavigationManager.goTo(direction: NavigationObject) {
     send(NavigationAction.GoTo(direction = direction))
 }
+
+
+

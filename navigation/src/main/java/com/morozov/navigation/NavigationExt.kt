@@ -2,6 +2,7 @@ package com.morozov.navigation
 
 import android.annotation.SuppressLint
 import androidx.navigation.NavHostController
+import timber.log.Timber
 
 
 fun NavHostController.onNavigationEvent(event: NavigationAction) {
@@ -17,10 +18,10 @@ fun NavHostController.onNavigationEvent(event: NavigationAction) {
 @SuppressLint("RestrictedApi")
 fun NavHostController.navigated(direction: NavigationObject) {
     try {
-        // Timber.d(direction.toString())
+        Timber.d(direction.toString())
         navigate(direction)
     } catch (e: Exception) {
-        // Timber.e(e)
+        Timber.e(e)
     }
 }
 

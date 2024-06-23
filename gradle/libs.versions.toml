@@ -32,7 +32,7 @@ navigationTesting = "2.7.7"
 mockk = "1.12.0"
 appcompat = "1.7.0"
 material = "1.12.0"
-
+timber  = "5.0.1"
 
 
 [libraries]
@@ -91,6 +91,7 @@ mockk = {module = "io.mockk:mockk",version.ref = "mockk"}
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+timber = {module = 'com.jakewharton.timber:timber',name = "timber",version.ref = "timber"}
 
 
 [plugins]
