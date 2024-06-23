@@ -1,9 +1,7 @@
-package com.morozov.testtaskforviesure.di
+package com.morozov.data.network
 
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.morozov.testtaskforviesure.data.ApiService
-import com.morozov.testtaskforviesure.data.RepositoryImpl
 import com.morozov.domain.domain.ApiRepository
 import dagger.Module
 import dagger.Provides
@@ -19,7 +17,6 @@ import javax.inject.Singleton
 
 
 private const val BASE_URL = "https://c27b2d72-8d9c-4aa0-b549-7ae7e5666815.mock.pstmn.io/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -75,5 +72,3 @@ object AppModule {
 
 
 }
-
-

@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":Common"))
     implementation(project(":room"))
     implementation(project(":domain"))
+    implementation(project(":data"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -85,17 +86,8 @@ dependencies {
     api(libs.hilt.compose.navigation)
     ksp(libs.dagger.compiler)
     ksp(libs.hilt.compiler)
-    //retrofit
-    implementation(libs.okHttp3)
-    implementation(libs.retrofit)
-    implementation(libs.retrofitConverterGson)
     //coil
     implementation(libs.coil)
-    //room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.bundles.android.room.bundle)
 
     //refresher
      implementation(libs.pullrefresh)

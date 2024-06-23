@@ -1,7 +1,7 @@
-package com.morozov.testtaskforviesure.data
+package com.morozov.data.network
 
+import com.morozov.common.utils.toCustomDateFormat
 import com.morozov.domain.domain.models.Book
-import com.morozov.testtaskforviesure.ui.utils.toCustomDateFormat
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

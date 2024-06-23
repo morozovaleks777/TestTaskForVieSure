@@ -1,6 +1,6 @@
 package com.morozov.testtaskforviesure
 
-import com.morozov.testtaskforviesure.ui.utils.toCustomDateFormat
+import com.morozov.common.utils.toCustomDateFormat
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

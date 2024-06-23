@@ -2,8 +2,8 @@ package com.morozov.testtaskforviesure
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.morozov.testtaskforviesure.data.ApiService
-import com.morozov.testtaskforviesure.di.AppModule
+import com.morozov.data.network.ApiService
+import com.morozov.data.network.AppModule
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
@@ -17,15 +17,15 @@ class AppModuleTest {
     private lateinit var cache: Cache
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var retrofit: Retrofit
-    private lateinit var apiService: ApiService
+    private lateinit var apiService: com.morozov.data.network.ApiService
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
-        cache = AppModule.provideCache(context)
-        okHttpClient = AppModule.provideOkhttpBuilder(cache)
-        retrofit = AppModule.provideRetrofit(okHttpClient)
-        apiService = AppModule.provideApiService(retrofit)
+        cache = com.morozov.data.network.AppModule.provideCache(context)
+        okHttpClient = com.morozov.data.network.AppModule.provideOkhttpBuilder(cache)
+        retrofit = com.morozov.data.network.AppModule.provideRetrofit(okHttpClient)
+        apiService = com.morozov.data.network.AppModule.provideApiService(retrofit)
     }
 
     @Test

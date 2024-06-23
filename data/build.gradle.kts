@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlinAndroidKsp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -42,4 +44,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //retrofit
+    implementation(libs.okHttp3)
+    implementation(libs.retrofit)
+    implementation(libs.retrofitConverterGson)
+    //hilt
+    api (libs.hilt.android)
+    api(libs.hilt.compose.navigation)
+    ksp(libs.dagger.compiler)
+    ksp(libs.hilt.compiler)
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
 }

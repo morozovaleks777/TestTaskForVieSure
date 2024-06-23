@@ -17,7 +17,7 @@ import com.morozov.testtaskforviesure.navigation.BookDetail
 import com.morozov.testtaskforviesure.navigation.NavigationManager
 import com.morozov.testtaskforviesure.navigation.goToAboutMe
 import com.morozov.testtaskforviesure.navigation.goToBooksDetail
-import com.morozov.testtaskforviesure.ui.utils.toCustomDateFormat
+import com.morozov.common.utils.toCustomDateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

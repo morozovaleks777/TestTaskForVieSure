@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.data
+package com.morozov.data.network
 
 import android.util.Log
 import com.morozov.common.ApiError

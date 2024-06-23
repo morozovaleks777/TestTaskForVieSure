@@ -33,7 +33,7 @@ import com.morozov.testtaskforviesure.ui.components.topbar.TopBarAction
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
 import com.morozov.testtaskforviesure.ui.theme.AppTypography
 import com.morozov.testtaskforviesure.ui.theme.Grey
-import com.morozov.testtaskforviesure.ui.utils.clickableNoRipple
+import com.morozov.testtaskforviesure.utils.clickableNoRipple
 
 
 @Composable
