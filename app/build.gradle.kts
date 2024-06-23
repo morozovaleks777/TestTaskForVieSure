@@ -71,6 +71,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":navigation"))
+    implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -91,6 +92,8 @@ dependencies {
 
     //refresher
      implementation(libs.pullrefresh)
+    //timber
+    implementation(libs.timber)
 
     testImplementation(libs.testmockito.core)
     testImplementation(libs.testmockito.kotlin)

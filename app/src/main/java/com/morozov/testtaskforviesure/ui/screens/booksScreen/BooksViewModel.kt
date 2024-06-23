@@ -1,18 +1,16 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
-import android.util.Log
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.morozov.common.ApiResult
 import com.morozov.common.LoadableUiState
-import com.morozov.domain.domain.models.Book
 import com.morozov.common.toLoadableUiState
-import com.morozov.domain.domain.GetBooksUseCase
-import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
-
-import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import com.morozov.common.utils.toCustomDateFormat
+import com.morozov.domain.domain.GetBooksUseCase
+import com.morozov.domain.domain.models.Book
+import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
+import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 import com.morozov.navigation.AboutMe
 import com.morozov.navigation.BookDetail
 import com.morozov.navigation.NavigationManager
@@ -34,7 +32,8 @@ import javax.inject.Inject
 data class BooksUiState(
     val booksPageState: LoadableUiState<List<Book>> = LoadableUiState.Loading(),
     val isRefreshing: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val title: String = "Books"
 )
 
 @Stable
@@ -63,13 +62,13 @@ class BooksViewModel @Inject constructor(
             is BooksAction.GoToBookDetail -> {
                 navigationManager.goToBooksDetail(
                     bookDetail = BookDetail(
-                        author = action.book.author.orEmpty(),
-                        description = action.book.description.orEmpty(),
-                        id = action.book.id ?: 0,
-                        image = action.book.image.orEmpty(),
-                        releaseDate = action.book.releaseDate.orEmpty(),
-                        title = action.book.title.orEmpty(),
-                        titlee = action.book.titlee.orEmpty(),
+                        author = action.book.author,
+                        description = action.book.description,
+                        id = action.book.id ,
+                        image = action.book.image,
+                        releaseDate = action.book.releaseDate,
+                        title = action.book.title,
+                        titlee = action.book.titlee,
                     )
                 )
             }
@@ -95,7 +94,6 @@ class BooksViewModel @Inject constructor(
 
             result.fold(
                 onSuccess = { books ->
-                    Log.d("post", "fetchBooks: onsucces")
                     // Insert books into the local database
                     val sortedBooks = books?.sortedBy { book ->
                         book.releaseDate.toCustomDateFormat()
@@ -107,7 +105,8 @@ class BooksViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             booksPageState = (books ?: emptyList()).toLoadableUiState(),
-                            isRefreshing = false
+                            isRefreshing = false,
+                            title = "Books from api"
                         )
                     }
                 },
@@ -122,13 +121,12 @@ class BooksViewModel @Inject constructor(
                     delay(3000)
                     // Load locally stored books in case of failure
                     getBooksUseCaseFromRoom.invoke().collect { localBooks ->
-                        Log.d("post", "fetchBooks: local  $localBooks")
                         _uiState.update {
-                            Log.d("rost", "fetchBooks: updatestate")
                             it.copy(
                                 booksPageState = localBooks.toLoadableUiState(),
                                 isRefreshing = false,
-                                errorMessage = "Failed to sync data. Showing locally stored books."
+                                errorMessage = "Failed to sync data. Showing locally stored books.",
+                                title = "Books from database"
                             )
                         }
                     }
@@ -142,34 +140,20 @@ class BooksViewModel @Inject constructor(
         initialDelay: Long,
         block: suspend () -> ApiResult<T>
     ): Result<T?> {
-        var currentDelay = initialDelay
 
-        repeat(retries - 1) { attempt ->
-            Log.d("rost", "retryWithBackoff: attempt ${attempt + 1}")
+        repeat(retries - 1) { _->
             try {
                 val apiResult = block()
                 if (apiResult.success && apiResult.data != null) {
-                    Log.d("rost", "retryWithBackoff: success on attempt ${attempt + 1}")
                     return Result.success(apiResult.data)
-                } else {
-                    Log.d(
-                        "rost",
-                        "retryWithBackoff: block returned unsuccessful ApiResult on attempt ${attempt + 1}"
-                    )
-                    throw IOException(apiResult.error?.message ?: "Unknown error")
                 }
             } catch (e: Exception) {
-                Log.d(
-                    "rost",
-                    "retryWithBackoff: failed on attempt ${attempt + 1}, waiting for $currentDelay ms"
-                )
-                delay(currentDelay)
+                delay(initialDelay)
 
             }
         }
 
         return try {
-            Log.d("rost", "retryWithBackoff: final attempt")
             val apiResult = block()
             if (apiResult.success && apiResult.data != null) {
                 Result.success(apiResult.data)
@@ -181,11 +165,8 @@ class BooksViewModel @Inject constructor(
                 )
             }
         } catch (e: Exception) {
-            Log.d("rost", "retryWithBackoff: final attempt failed")
             Result.failure(e)
         }
     }
-
-
 }
 

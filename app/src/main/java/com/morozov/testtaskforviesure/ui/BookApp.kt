@@ -35,6 +35,7 @@ import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
 import com.morozov.navigation.onNavigationEvent
 import com.morozov.testtaskforviesure.ui.components.topbar.BookAppBar
 import com.morozov.testtaskforviesure.ui.screens.aboutMe.AboutMe
+import com.morozov.testtaskforviesure.ui.screens.aboutMe.AboutMeViewModel
 import com.morozov.testtaskforviesure.ui.screens.bookDetail.BookDetailScreen
 import com.morozov.testtaskforviesure.ui.screens.bookDetail.BookDetailViewModel
 import com.morozov.testtaskforviesure.ui.screens.booksScreen.BooksScreen
@@ -117,6 +118,7 @@ private fun NavHostGraph(
         }
         composablePage<AboutMe> {
             AboutMe(
+                viewModel = hiltViewModel<AboutMeViewModel>()
             )
         }
     }

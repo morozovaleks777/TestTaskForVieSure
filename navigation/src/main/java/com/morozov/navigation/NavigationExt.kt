@@ -8,7 +8,11 @@ import timber.log.Timber
 fun NavHostController.onNavigationEvent(event: NavigationAction) {
     when (event) {
         is NavigationAction.GoTo -> {
-            navigated(event.direction)
+            navigate(event.direction) {
+                popUpTo(graph.startDestinationId) {
+                    inclusive = true
+                }
+            }
         }
 
         else -> popBackIfAvailable()

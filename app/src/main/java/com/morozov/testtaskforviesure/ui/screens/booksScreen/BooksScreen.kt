@@ -74,15 +74,19 @@ fun BooksScreen(
     LaunchedEffect(Unit) {
         topBarStateUpdater(
             TopBarState(
+                isCenterAligned = true,
                 actions = topBarActions,
                 isTransparent = true,
+                showTitle = true,
+                customTitleView = {
+                    Text(uiState.title)
+                }
             )
         )
     }
 
     LaunchedEffect(Unit) {
         if (uiState.booksPageState !is LoadableUiState.Available) {
-            Log.d("invoked", "BooksScreen: ")
             viewModel.send(BooksAction.GetBooksData())
         }
     }
