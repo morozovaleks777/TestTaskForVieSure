@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.data.error
+package com.morozov.testtaskforviesure.error
 
 
 import java.net.SocketException

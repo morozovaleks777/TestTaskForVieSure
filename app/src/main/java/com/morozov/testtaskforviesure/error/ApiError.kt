@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.data.error
+package com.morozov.testtaskforviesure.error
 
 sealed class ApiError {
     abstract val throwable: Throwable

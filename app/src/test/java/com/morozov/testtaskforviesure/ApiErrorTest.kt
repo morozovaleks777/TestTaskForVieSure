@@ -1,7 +1,7 @@
 package com.morozov.testtaskforviesure
 
 
-import com.morozov.testtaskforviesure.data.error.ApiError
+import com.morozov.testtaskforviesure.error.ApiError
 import org.junit.Assert.*
 import org.junit.Test
 
