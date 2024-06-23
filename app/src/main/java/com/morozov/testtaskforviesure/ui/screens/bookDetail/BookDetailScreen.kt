@@ -26,8 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.morozov.navigation.BookDetail
 import com.morozov.testtaskforviesure.R.drawable
-import com.morozov.testtaskforviesure.navigation.BookDetail
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarAction
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState

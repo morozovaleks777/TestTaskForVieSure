@@ -1,6 +1,7 @@
-package com.morozov.testtaskforviesure.navigation
+package com.morozov.navigation
 
 import kotlinx.serialization.Serializable
+
 @Serializable
 sealed class NavigationAction {
     @Serializable

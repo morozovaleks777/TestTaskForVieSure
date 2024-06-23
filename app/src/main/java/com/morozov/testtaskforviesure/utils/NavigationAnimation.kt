@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.navigation
+package com.morozov.testtaskforviesure.utils
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.morozov.testtaskforviesure.utils.AppAnimationEasing.STANDARD_ACCELERATE
+import com.morozov.testtaskforviesure.utils.AppAnimationEasing.STANDARD_DECELERATE
 
 
 inline fun <reified T : Any> NavGraphBuilder.composablePage(
@@ -46,12 +48,12 @@ object Transitions {
             towards = AnimatedContentTransitionScope.SlideDirection.Start,
             animationSpec = tween(
                 durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_DECELERATE
+                easing = STANDARD_DECELERATE
             )
         ) + fadeIn(
             animationSpec = tween(
                 durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_DECELERATE
+                easing = STANDARD_DECELERATE
             )
         )
     }
@@ -60,12 +62,12 @@ object Transitions {
             towards = AnimatedContentTransitionScope.SlideDirection.End,
             animationSpec = tween(
                 durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_ACCELERATE
+                easing = STANDARD_ACCELERATE
             )
         ) + fadeOut(
             animationSpec = tween(
                 durationMillis = AnimationDuration.SLOW_01,
-                easing = AppAnimationEasing.STANDARD_ACCELERATE
+                easing = STANDARD_ACCELERATE
             )
         )
     }

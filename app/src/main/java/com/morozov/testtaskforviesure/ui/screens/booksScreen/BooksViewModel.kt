@@ -12,12 +12,12 @@ import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 
 import com.morozov.testtaskforviesure.domain.roomUseCases.GetBooksUseCaseFromRoom
-import com.morozov.testtaskforviesure.navigation.AboutMe
-import com.morozov.testtaskforviesure.navigation.BookDetail
-import com.morozov.testtaskforviesure.navigation.NavigationManager
-import com.morozov.testtaskforviesure.navigation.goToAboutMe
-import com.morozov.testtaskforviesure.navigation.goToBooksDetail
 import com.morozov.common.utils.toCustomDateFormat
+import com.morozov.navigation.AboutMe
+import com.morozov.navigation.BookDetail
+import com.morozov.navigation.NavigationManager
+import com.morozov.navigation.goToAboutMe
+import com.morozov.navigation.goToBooksDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

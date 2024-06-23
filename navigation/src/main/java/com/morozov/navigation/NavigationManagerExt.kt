@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.navigation
+package com.morozov.navigation
 
 
 fun NavigationManager.goBack() {

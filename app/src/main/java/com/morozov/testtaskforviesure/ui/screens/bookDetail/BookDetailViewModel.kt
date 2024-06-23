@@ -4,8 +4,8 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import com.morozov.common.LoadableUiState
 import com.morozov.domain.domain.models.Book
-import com.morozov.testtaskforviesure.navigation.NavigationManager
-import com.morozov.testtaskforviesure.navigation.goBack
+import com.morozov.navigation.NavigationManager
+import com.morozov.navigation.goBack
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

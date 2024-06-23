@@ -1,9 +1,9 @@
-package com.morozov.testtaskforviesure.di
+package com.morozov.navigation.di
 
 
-import com.morozov.testtaskforviesure.di.annotations.AppDispatchers
-import com.morozov.testtaskforviesure.di.annotations.Dispatcher
-import com.morozov.testtaskforviesure.navigation.NavigationManager
+import com.morozov.navigation.NavigationManager
+import com.morozov.navigation.di.annotations.AppDispatchers
+import com.morozov.navigation.di.annotations.Dispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,9 +34,10 @@ object LifecycleModule {
     fun provideNavigationManager(
         @ActivityRetainedScoped coroutineScope: CoroutineScope,
         @Dispatcher(AppDispatchers.DEFAULT) dispatcher: CoroutineDispatcher,
-    ): NavigationManager = NavigationManager(
-        coroutineScope = coroutineScope,
-        dispatcher = dispatcher
-    )
+    ): NavigationManager =
+       NavigationManager(
+            coroutineScope = coroutineScope,
+            dispatcher = dispatcher
+        )
 
 }

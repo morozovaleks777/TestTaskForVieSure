@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure.navigation
+package com.morozov.navigation
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

@@ -2,8 +2,8 @@ package com.morozov.testtaskforviesure.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.morozov.testtaskforviesure.navigation.NavigationAction
-import com.morozov.testtaskforviesure.navigation.NavigationManager
+import com.morozov.navigation.NavigationAction
+import com.morozov.navigation.NavigationManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
