@@ -26,11 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -55,4 +55,15 @@ dependencies {
     ksp(libs.hilt.compiler)
     //serialization
     implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(libs.testmockito.core)
+    testImplementation(libs.testmockito.kotlin)
+    testImplementation(libs.testmockito.release)
+    testImplementation(libs.testmockito.inline)
+
+    testImplementation(libs.testcore.testing)
+    testImplementation(libs.testcoroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.gson2)
 }

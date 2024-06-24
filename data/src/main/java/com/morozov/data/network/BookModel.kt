@@ -30,7 +30,7 @@ fun BookModelItem.toDomain(): Book {
         description = this.description.orEmpty(),
         id = this.id ?: 0,
         image = this.image.orEmpty(),
-        releaseDate = this.releaseDate.toCustomDateFormat(),
+        releaseDate ="6/6/1949".toCustomDateFormat(),  //this.releaseDate.toCustomDateFormat(),
         title = this.title.orEmpty(),
         titlee = this.titlee.orEmpty()
     )

@@ -10,7 +10,7 @@ import org.junit.Test
 import retrofit2.Retrofit
 
 
-class AppModuleTest {
+class ApiModuleTest {
 
     private lateinit var context: Context
     private lateinit var cache: Cache
@@ -21,10 +21,10 @@ class AppModuleTest {
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
-        cache = com.morozov.data.network.AppModule.provideCache(context)
-        okHttpClient = com.morozov.data.network.AppModule.provideOkhttpBuilder(cache)
-        retrofit = com.morozov.data.network.AppModule.provideRetrofit(okHttpClient)
-        apiService = com.morozov.data.network.AppModule.provideApiService(retrofit)
+        cache = com.morozov.data.network.ApiModule.provideCache(context)
+        okHttpClient = com.morozov.data.network.ApiModule.provideOkhttpBuilder(cache)
+        retrofit = com.morozov.data.network.ApiModule.provideRetrofit(okHttpClient)
+        apiService = com.morozov.data.network.ApiModule.provideApiService(retrofit)
     }
 
     @Test

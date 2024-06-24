@@ -101,7 +101,7 @@ class UseCasesTest {
         val result = getBooksUseCaseFromRoom.invoke()
 
         // Collect the flow and verify the result
-        result.collect { books ->
+        result.forEach() { books ->
             assertEquals(mockBooks, books)
         }
     }

@@ -1,15 +1,16 @@
-package com.morozov.testtaskforviesure
+package com.morozov.common
+
+
 
 import com.morozov.common.utils.toCustomDateFormat
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class DateFormatterTest {
-
     @Test
     fun testValidDate() {
         val input = "6/8/1949"
-        val expectedOutput = "Wed June 8, '49"
+        val expectedOutput = "Wed, June 8, '49"
         assertEquals(expectedOutput, input.toCustomDateFormat())
     }
 

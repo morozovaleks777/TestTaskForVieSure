@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure
+package com.morozov.room
 
 
 import com.morozov.common.ApiError

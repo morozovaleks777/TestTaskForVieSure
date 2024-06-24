@@ -54,4 +54,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     //timber
     implementation(libs.timber)
+
+    testImplementation(libs.testmockito.core)
+    testImplementation(libs.testmockito.kotlin)
+    testImplementation(libs.testmockito.release)
+    testImplementation(libs.testmockito.inline)
+
+    testImplementation(libs.testcore.testing)
+    testImplementation(libs.testcoroutines.test)
+    testImplementation(libs.mockk)
 }

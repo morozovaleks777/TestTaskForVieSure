@@ -1,4 +1,4 @@
-package com.morozov.testtaskforviesure
+package com.morozov.data
 
 
 import com.morozov.common.ApiError

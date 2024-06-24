@@ -1,6 +1,7 @@
 package com.morozov.common.utils
 
 
+import android.util.Log
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -17,7 +18,7 @@ fun String?.toCustomDateFormat(): String {
         val date = LocalDate.parse(this, formatter)
 
         val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-        val month = date.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+        val month = date.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
         val dayOfMonth = date.dayOfMonth
         val year = date.year % 100
 
@@ -26,3 +27,4 @@ fun String?.toCustomDateFormat(): String {
         ""
     }
 }
+

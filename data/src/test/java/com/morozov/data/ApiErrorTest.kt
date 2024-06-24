@@ -1,7 +1,9 @@
-package com.morozov.testtaskforviesure
+package com.morozov.data
 
 
-import com.morozov.testtaskforviesure.error.ApiError
+
+
+import com.morozov.data.network.error.ApiError
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -10,7 +12,7 @@ class ApiErrorTest {
     @Test
     fun `ConnectionError should have correct message`() {
         val throwable = Throwable("Connection error")
-        val error = ApiError.ConnectionError(throwable)
+        val error = ApiError   .ConnectionError(throwable)
 
         assertEquals("Connection error", error.message)
         assertEquals(throwable, error.throwable)
