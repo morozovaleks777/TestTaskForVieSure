@@ -1,15 +1,13 @@
-
-
-import com.morozov.domain.domain.models.Book
 import com.morozov.common.models.BookDomainEntity
 import com.morozov.domain.domain.RoomRepository
+import com.morozov.domain.domain.models.Book
+import com.morozov.domain.domain.roomUseCases.DeleteBookByIdUseCase
 import com.morozov.domain.domain.roomUseCases.DeleteBookUseCase
+import com.morozov.domain.domain.roomUseCases.GetBookByIdUseCase
+import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 import com.morozov.domain.domain.roomUseCases.UpdateBookUseCase
-import com.morozov.domain.domain.roomUseCases.DeleteBookByIdUseCase
-import com.morozov.domain.domain.roomUseCases.GetBookByIdUseCase
 import com.morozov.domain.domain.toDomainEntity
-import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,7 +16,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 class UseCasesTest {
@@ -57,7 +56,15 @@ class UseCasesTest {
 
     @Test
     fun `test deleteBookUseCase`() = runBlocking {
-        val book = Book(id = 1, title = "Book", author = "", description = "", image = "", releaseDate = "", titlee = "")
+        val book = Book(
+            id = 1,
+            title = "Book",
+            author = "",
+            description = "",
+            image = "",
+            releaseDate = "",
+            titlee = ""
+        )
 
         // Call the use case
         deleteBookUseCase.invoke(book)
@@ -70,7 +77,15 @@ class UseCasesTest {
     @Test
     fun `test getBookByIdUseCase`() = runBlocking {
         val bookId = 1
-        val mockBook = Book(id = bookId, title = "Book", author = "", description = "", image = "", releaseDate = "", titlee = "")
+        val mockBook = Book(
+            id = bookId,
+            title = "Book",
+            author = "",
+            description = "",
+            image = "",
+            releaseDate = "",
+            titlee = ""
+        )
         val mockEntity = mockBook.toDomainEntity()
         val mockFlow: Flow<BookDomainEntity?> = flow { emit(mockEntity) }
 
@@ -81,7 +96,9 @@ class UseCasesTest {
 
         // Collect the flow and verify the result
         result.collect { book ->
-            assertEquals(mockBook, book)
+            val book1 = book?.copy(key = "")
+            val mockBook1 = mockBook.copy(key = "")
+            assertEquals(mockBook1, book1)
         }
     }
 
@@ -89,8 +106,26 @@ class UseCasesTest {
     @Test
     fun `test getBooksUseCase`() = runBlocking {
         val mockBooks = listOf(
-            Book(id = 1, title = "Book1", author = "", description = "", image = "", releaseDate = "", titlee = ""),
-            Book(id = 2, title = "Book2", author = "", description = "", image = "", releaseDate = "", titlee = "")
+            Book(
+                id = 1,
+                title = "Book1",
+                author = "",
+                description = "",
+                image = "",
+                releaseDate = "",
+                titlee = "",
+                key = ""
+            ),
+            Book(
+                id = 2,
+                title = "Book2",
+                author = "",
+                description = "",
+                image = "",
+                releaseDate = "",
+                titlee = "",
+                key = ""
+            )
         )
         val mockEntities = mockBooks.map { it.toDomainEntity() }
         val mockFlow: Flow<List<BookDomainEntity>> = flow { emit(mockEntities) }
@@ -101,14 +136,24 @@ class UseCasesTest {
         val result = getBooksUseCaseFromRoom.invoke()
 
         // Collect the flow and verify the result
-        result.forEach() { books ->
-            assertEquals(mockBooks, books)
+        val books1 = result.map { book ->
+            book.copy(key = "")
         }
+        assertEquals(mockBooks, books1)
     }
+
 
     @Test
     fun `test updateBookUseCase`() = runBlocking {
-        val book = Book(id = 1, title = "Book", author = "", description = "", image = "", releaseDate = "", titlee = "")
+        val book = Book(
+            id = 1,
+            title = "Book",
+            author = "",
+            description = "",
+            image = "",
+            releaseDate = "",
+            titlee = ""
+        )
 
         // Call the use case
         updateBookUseCase.invoke(book)
@@ -119,7 +164,15 @@ class UseCasesTest {
 
     @Test
     fun `test insertBookUseCase`() = runBlocking {
-        val book = Book(id = 1, title = "Book", author = "", description = "", image = "", releaseDate = "", titlee = "")
+        val book = Book(
+            id = 1,
+            title = "Book",
+            author = "",
+            description = "",
+            image = "",
+            releaseDate = "",
+            titlee = ""
+        )
 
         // Call the use case
         insertBookUseCase.invoke(book)

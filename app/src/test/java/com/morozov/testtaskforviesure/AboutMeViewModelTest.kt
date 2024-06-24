@@ -54,6 +54,4 @@ class AboutMeViewModelTest {
         // Verify that navigationManager.goBack() was called exactly once
         Mockito.verify(navigationManager, Mockito.times(1)).goBack()
     }
-
-
 }

@@ -12,5 +12,5 @@ data class Book(
     val releaseDate: String,
     val title: String,
     val titlee: String,
-    val key: String = UUID.randomUUID().toString()
+    var key: String = UUID.randomUUID().toString()
 )

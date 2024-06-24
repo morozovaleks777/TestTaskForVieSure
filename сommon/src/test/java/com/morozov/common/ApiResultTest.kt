@@ -9,11 +9,9 @@ class ApiResultTest {
 
     @Test
     fun `test successful ApiResult`() {
-        // Создаем успешный ApiResult с данными
         val data = "Success data"
         val apiResult = ApiResult(success = true, data = data, error = null)
 
-        // Проверяем, что данные в ApiResult соответствуют ожидаемым
         assertEquals(true, apiResult.success)
         assertEquals(data, apiResult.data)
         assertEquals(null, apiResult.error)

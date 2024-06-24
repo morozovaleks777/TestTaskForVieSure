@@ -2,6 +2,7 @@ package com.morozov.testtaskforviesure.ui.screens.bookDetail
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,9 +30,9 @@ import coil.request.ImageRequest
 import com.morozov.navigation.BookDetail
 import com.morozov.testtaskforviesure.R.drawable
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
-import com.morozov.testtaskforviesure.ui.components.topbar.TopBarAction
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
 import com.morozov.testtaskforviesure.ui.theme.AppTypography
+import com.morozov.testtaskforviesure.ui.theme.BlackMain
 import com.morozov.testtaskforviesure.ui.theme.Grey
 import com.morozov.testtaskforviesure.utils.clickableNoRipple
 
@@ -42,7 +43,6 @@ fun BookDetailScreen(
     viewModel: BookDetailViewModel
 ) {
     val topBarStateUpdater = LocalTopBarUpdater.current
-    val topBarActions = prepareTopBarActions(sendAction = viewModel.send)
     LaunchedEffect(Unit) {
         topBarStateUpdater(
             TopBarState(
@@ -59,7 +59,6 @@ fun BookDetailScreen(
                 showTitle = true,
                 customTitleView = { Text(args.title) },
                 showBackIcon = true,
-                actions = topBarActions,
                 isTransparent = true,
             )
         )
@@ -68,26 +67,13 @@ fun BookDetailScreen(
 }
 
 
-@Composable
-private fun prepareTopBarActions(
-    sendAction: (BookDetailAction) -> Unit,
-): List<TopBarAction> {
-    return listOf(
-//        TopBarAction(
-//            icon = Icons.AutoMirrored.Default.ArrowBack,
-//            onClick = { sendAction(BookDetailAction.GoBack) },
-//            contentDescription = "app bar button mute"
-//        ),
-
-    )
-}
-
 
 @Composable
 fun BookDetailLayout(book: BookDetail) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(BlackMain)
             .padding(16.dp)
     ) {
         val releaseDate =

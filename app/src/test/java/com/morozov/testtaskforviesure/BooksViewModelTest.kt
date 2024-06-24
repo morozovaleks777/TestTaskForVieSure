@@ -14,11 +14,8 @@ import com.morozov.testtaskforviesure.ui.screens.booksScreen.BooksAction
 import com.morozov.testtaskforviesure.ui.screens.booksScreen.BooksViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
@@ -77,11 +74,10 @@ class BooksViewModelTest {
     }
 
 
-
     @Test
     fun testGoToBookDetail() {
         // Mock book data
-        val mockBook = Book("1", "Book 1", 1, "Description 1", "2023-01-01", "","")
+        val mockBook = Book("1", "Book 1", 1, "Description 1", "2023-01-01", "", "")
 
         // Call the send function with GoToBookDetail action
         viewModel.send(BooksAction.GoToBookDetail(mockBook))

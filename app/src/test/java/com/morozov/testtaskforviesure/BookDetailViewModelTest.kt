@@ -62,5 +62,4 @@ class BookDetailViewModelTest {
         viewModel.send(BookDetailAction.ShowToast(message))
 
     }
-
 }

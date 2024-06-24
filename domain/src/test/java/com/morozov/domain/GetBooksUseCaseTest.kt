@@ -1,4 +1,4 @@
-package com.morozov.room
+package com.morozov.domain
 
 
 import com.morozov.common.ApiError
@@ -6,7 +6,6 @@ import com.morozov.common.ApiResult
 import com.morozov.domain.domain.models.Book
 import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.ApiRepository
-
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -15,11 +14,10 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
-class GetBooksUseCaseFromRoomTest {
+class GetBooksUseCaseTest {
 
     @Mock
     private lateinit var repository: ApiRepository
-
     private lateinit var getBooksUseCase: GetBooksUseCase
 
     @Before
