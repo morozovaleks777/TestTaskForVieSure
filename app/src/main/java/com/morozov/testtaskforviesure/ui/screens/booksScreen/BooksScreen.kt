@@ -25,10 +25,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -153,11 +151,6 @@ fun BookList(books: List<Book>, lazyListState: LazyListState, onBookClick: (Book
             BookListItem(book = book, onBookClick = onBookClick)
         }
     }
-//    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-//        books.forEach{book ->
-//        BookListItem(book = book, onBookClick = onBookClick)
-//    }}
-
 }
 
 @Composable

@@ -1,6 +1,5 @@
 package com.morozov.testtaskforviesure.ui.screens.booksScreen
 
-import android.util.Log
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +9,6 @@ import com.morozov.common.toLoadableUiState
 import com.morozov.common.utils.toCustomDateFormat
 import com.morozov.domain.domain.GetBooksUseCase
 import com.morozov.domain.domain.models.Book
-import com.morozov.domain.domain.roomUseCases.DeleteBookUseCase
 import com.morozov.domain.domain.roomUseCases.GetBooksUseCaseFromRoom
 import com.morozov.domain.domain.roomUseCases.InsertBookUseCase
 import com.morozov.navigation.AboutMe
@@ -24,7 +22,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -99,7 +96,6 @@ class BooksViewModel @Inject constructor(
 
             result.fold(
                 onSuccess = { books ->
-                    Log.d("post", "fetchBooks:  onSuccess")
                     // Insert books into the local database
                     val sortedBooks = books?.sortedBy { book ->
                         book.releaseDate.toCustomDateFormat()
@@ -115,10 +111,8 @@ class BooksViewModel @Inject constructor(
                             title = "Books from api"
                         )
                     }
-                    Log.d("post", "fetchBooks:  onSuccess - ${uiState.value}")
                 },
                 onFailure = { error ->
-                    Log.d("post", "fetchBooks:  onFailure")
                     _uiState.update {
                         it.copy(
                             booksPageState = LoadableUiState.Error(error.message),

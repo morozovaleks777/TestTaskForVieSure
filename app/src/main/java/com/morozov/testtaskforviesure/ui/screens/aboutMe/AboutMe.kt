@@ -23,18 +23,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.morozov.testtaskforviesure.R
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
+import com.morozov.testtaskforviesure.ui.theme.AppDimens
 import com.morozov.testtaskforviesure.ui.theme.AppTypography
 import com.morozov.testtaskforviesure.ui.theme.BlackMain
 import com.morozov.testtaskforviesure.ui.theme.Grey
+import com.morozov.testtaskforviesure.ui.theme.Purple40
 import com.morozov.testtaskforviesure.utils.clickableNoRipple
 
 
@@ -60,7 +62,7 @@ fun AboutMe(
                 },
                 isCenterAligned = true,
                 showTitle = true,
-                customTitleView = { Text("About me") },
+                customTitleView = { Text(stringResource(R.string.about_me)) },
                 showBackIcon = true,
                 isTransparent = true,
             )
@@ -69,28 +71,30 @@ fun AboutMe(
 
 
 
-    LazyColumn (
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
-            .padding(16.dp)
+            .padding(AppDimens.basesSpacingsSpacingLg16)
             .background(BlackMain)
     ) {
         stickyHeader {
             Header()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
         }
 
 
-       item {   WorkExperience()
-        Spacer(modifier = Modifier.height(16.dp))}
+        item {
+            WorkExperience()
+            Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
+        }
         item {
             Education()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
         }
-      item {
-          Skills()
-      }
+        item {
+            Skills()
+        }
     }
 }
 
@@ -108,7 +112,7 @@ fun Header() {
                 .clip(CircleShape),
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(AppDimens.basesSpacingsSpacingLg16))
         Column {
             Text(text = "OLEKSANDR MOROZOV", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Text(text = "Android Software Engineer", fontSize = 16.sp)
@@ -118,63 +122,63 @@ fun Header() {
 
 @Composable
 fun WorkExperience() {
-    Section(title = "WORK EXPERIENCE") {
+    Section(title = stringResource(R.string.work_experience)) {
         WorkExperienceItem(
-            role = "Software Engineer",
-            company = "GLOBALLOGIC",
-            date = "Dec 2022 - Present",
-            description = "Key role in a 6-member Android development team\nLead initiatives in Kotlin and Jetpack Compose (Daily Wire application)\nExpertise in MVVM, Jetpack Compose, coroutines, Kettle flow, Hilt"
+            role = stringResource(R.string.software_engineer),
+            company = stringResource(R.string.global_logic),
+            date = stringResource(R.string.dec_2022_present),
+            description = stringResource(R.string.key_role_in_a_5_member)
         )
         WorkExperienceItem(
-            role = "Junior Software Engineer",
-            company = "GLOBALLOGIC",
-            date = "Sep 2021 - Dec 2022",
-            description = "Key role in a 5-member Android development team\nLead initiatives in Kotlin and Jetpack Compose (Bank Wire application)\nExpertise in MVVM, Jetpack Compose, coroutines, Kettle flow, Hilt"
+            role = stringResource(R.string.junior_software_engineer),
+            company = stringResource(R.string.global_logic),
+            date = stringResource(R.string.sep_2021_dec_2022),
+            description = stringResource(R.string.key_role_in_a_3_member)
         )
         WorkExperienceItem(
-            role = "Associate Software Engineer",
-            company = "GLOBALLOGIC",
-            date = "Oct 2021 - Sep 2022",
-            description = "Leveraged Java and Kotlin in crafting top-tier sports and news apps\nSignificantly improved app functionality using Dagger\nAdvanced the digital transformation of a leading brand's sports channel"
+            role = stringResource(R.string.associate_software_engineer),
+            company = stringResource(R.string.global_logic),
+            date = stringResource(R.string.oct_2021_sep_2022),
+            description = stringResource(R.string.leveraged_java_and_kotlin_)
         )
         WorkExperienceItem(
-            role = "Trainee Software Engineer",
-            company = "GLOBALLOGIC UKRAINE",
-            date = "Jun 2021 - Sep 2021",
-            description = "Gained comprehensive training in Android development\nApplied advanced knowledge to Android app design and application\nContributed to the growth of Android development projects"
+            role = stringResource(R.string.trainee_software_engineer),
+            company = stringResource(R.string.global_logic),
+            date = stringResource(R.string.jun_2021_sep_2021),
+            description = stringResource(R.string.gained_comprehensive_training)
         )
     }
 }
 
 @Composable
 fun WorkExperienceItem(role: String, company: String, date: String, description: String) {
-    Column(modifier = Modifier.padding(bottom = 8.dp)) {
+    Column(modifier = Modifier.padding(bottom = AppDimens.basesSpacingsSpacingSm8)) {
         Text(text = role, fontWeight = FontWeight.Bold)
         Text(text = company, style = AppTypography.sub2)
         Text(text = date, style = AppTypography.sub2)
-        Text(text = description,  style = AppTypography.sub2)
+        Text(text = description, style = AppTypography.sub2)
     }
 }
 
 @Composable
 fun Education() {
-    Section(title = "EDUCATION") {
-        Text(text = "Quickly absorbed Javascript base fundamentals at Softserve, Nov 2018\nDemonstrated proficiency in English after studying at American English Center, Dec 2018\nEnrolled in JAVA DEV, JAVA core course, refining coding skills and methodologies, Mar 2019\nCompleted ADU implementation of automation testing course from ZOLOV and ITEA, earning high scores, Mar 2020-Mar 2021\nAndroid Kotlin course - EPAM April-June 2021", style = AppTypography.sub2)
+    Section(title = stringResource(R.string.education)) {
+        Text(text = stringResource(R.string.quickly_absorbed), style = AppTypography.sub2)
     }
 }
 
 @Composable
 fun Skills() {
-    Section(title = "SKILLS") {
-        Text(text = "Analytical Thinking, Java Programming Language, Firebase, Jetpack Compose, Kotlin, Adaptability, Android Operating System, Leadership, Coroutines, HILT", style = AppTypography.sub2)
+    Section(title = stringResource(R.string.skills)) {
+        Text(text = stringResource(R.string.analytical_thinking), style = AppTypography.sub2)
     }
 }
 
 @Composable
 fun Section(title: String, content: @Composable () -> Unit) {
     Column {
-        Text(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF6200EA))
-        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Purple40)
+        Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingSm8))
         content()
     }
 }

@@ -23,14 +23,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.morozov.navigation.BookDetail
+import com.morozov.testtaskforviesure.R
 import com.morozov.testtaskforviesure.R.drawable
 import com.morozov.testtaskforviesure.ui.LocalTopBarUpdater
 import com.morozov.testtaskforviesure.ui.components.topbar.TopBarState
+import com.morozov.testtaskforviesure.ui.theme.AppDimens
 import com.morozov.testtaskforviesure.ui.theme.AppTypography
 import com.morozov.testtaskforviesure.ui.theme.BlackMain
 import com.morozov.testtaskforviesure.ui.theme.Grey
@@ -77,7 +80,7 @@ fun BookDetailLayout(book: BookDetail) {
             .padding(16.dp)
     ) {
         val releaseDate =
-            book.releaseDate.let { if (it.isEmpty()) "unknown date" else book.releaseDate }
+            book.releaseDate.let { if (it.isEmpty()) stringResource(R.string.unknown_date) else book.releaseDate }
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest.Builder(LocalContext.current).data(data = book.image)
@@ -93,12 +96,12 @@ fun BookDetailLayout(book: BookDetail) {
                 .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
         Text(
             text = book.title,
             style = AppTypography.h5
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingSm8))
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.End,
@@ -106,7 +109,7 @@ fun BookDetailLayout(book: BookDetail) {
             style = AppTypography.sub2,
             color = Grey
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
         Text(
             modifier = Modifier
                 .weight(1f)
@@ -114,7 +117,7 @@ fun BookDetailLayout(book: BookDetail) {
             text = book.description,
             style = AppTypography.sub1
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(AppDimens.basesSpacingsSpacingLg16))
         Text(
             modifier = Modifier.navigationBarsPadding(),
             text = "Author: ${book.author}",

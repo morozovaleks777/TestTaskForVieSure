@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Test Task For VieSure</string>
+    <string name="work_experience">WORK EXPERIENCE</string>
+    <string name="software_engineer">Software Engineer</string>
+    <string name="global_logic">GLOBAL LOGIC</string>
+    <string name="dec_2022_present">Dec 2022 - Present</string>
+    <string name="key_role_in_a_5_member">Key role in a 5-member Android development team\nLead initiatives in Kotlin and Jetpack Compose (Daily Wire application)\nExpertise in MVVM, Jetpack Compose, coroutines, flow, Hilt</string>
+    <string name="junior_software_engineer">Junior Software Engineer</string>
+    <string name="sep_2021_dec_2022">Sep 2021 - Dec 2022</string>
+    <string name="key_role_in_a_3_member">Key role in a 3-member Android development team\nLead initiatives in Kotlin and Jetpack Compose (Bank Wire application)\nExpertise in MVVM, Jetpack Compose, coroutines, flow, Hilt</string>
+    <string name="associate_software_engineer">Associate Software Engineer</string>
+    <string name="oct_2021_sep_2022">Oct 2021 - Sep 2022</string>
+    <string name="leveraged_java_and_kotlin_">Leveraged Java and Kotlin in crafting top-tier sports and news apps\nSignificantly improved app functionality using Dagger\nAdvanced the digital transformation of a leading brand\'s sports channel</string>
+    <string name="trainee_software_engineer">Trainee Software Engineer</string>
+    <string name="jun_2021_sep_2021">Jun 2021 - Sep 2021</string>
+    <string name="gained_comprehensive_training">Gained comprehensive training in Android development\nApplied advanced knowledge to Android app design and application\nContributed to the growth of Android development projects</string>
+    <string name="education">EDUCATION</string>
+    <string name="quickly_absorbed">Quickly absorbed Javascript base fundamentals at Softserve, Nov 2018\nDemonstrated proficiency in English after studying at American English Center, Dec 2018\nEnrolled in JAVA DEV, JAVA core course, refining coding skills and methodologies, Mar 2019\nCompleted ADU implementation of automation testing course from ZOLOV and ITEA, earning high scores, Mar 2020-Mar 2021\nAndroid Kotlin course - EPAM April-June 2021</string>
+    <string name="skills">SKILLS</string>
+    <string name="analytical_thinking">Analytical Thinking, Java Programming Language, Firebase, Jetpack Compose, Kotlin, Adaptability, Android Operating System, Leadership, Coroutines, HILT</string>
+    <string name="about_me">About me</string>
+    <string name="unknown_date">unknown date</string>
 </resources>
