@@ -69,7 +69,7 @@ dependencies {
     implementation(project(":сommon"))
     implementation(project(":room"))
     implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":network"))
     implementation(project(":navigation"))
     implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
