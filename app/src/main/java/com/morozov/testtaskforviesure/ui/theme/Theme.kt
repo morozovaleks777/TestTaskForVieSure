@@ -59,10 +59,10 @@ fun ProvideDimens(
 
 @Composable
 fun ProvideTypography(
-    dwTypography: BookAppTypography,
+    appTypography: BookAppTypography,
     content: @Composable () -> Unit
 ) {
-    val typography = remember { dwTypography }
+    val typography = remember { appTypography }
     CompositionLocalProvider(LocalAppTypography provides typography, content = content)
 
 }
@@ -104,7 +104,7 @@ fun BookAppTheme(
     }
 
     ProvideDimens(dimensions = dimensions) {
-        ProvideTypography(dwTypography = typography) {
+        ProvideTypography(appTypography = typography) {
             MaterialTheme(
                 colorScheme = colorScheme,
                 typography = CompanionTypography,
